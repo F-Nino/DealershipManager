@@ -1,13 +1,18 @@
 package controller;
 
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import domain.CarObject;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import model.CarDAO;
@@ -37,6 +42,21 @@ public class Controller implements Initializable {
 	private Text informationTxt;
 
 	@FXML
+	private TableColumn<CarObject, Integer> carIDColumn;
+	
+	@FXML
+	private TableColumn<CarObject, String> carNameColumn;
+	
+	@FXML
+	private TableColumn<CarObject, String> carColorColumn;
+	
+	@FXML
+	private TableColumn<CarObject, Integer> carYearColumn;
+	
+	@FXML
+	private TableView<CarObject> carTableView;
+
+	@FXML
 	public void myAction() {
 		try {
 			carText = Integer.parseInt(carYear.getText());
@@ -48,6 +68,34 @@ public class Controller implements Initializable {
 			informationTxt.setText("YEAR MUST BE A NUMBER");
 			informationTxt.setFill(Color.BLACK); 
 		}
+
+	}
+	
+	@FXML
+	public void loadCarDetails() throws SQLException {
+		carIDColumn.setCellValueFactory(new PropertyValueFactory<CarObject,Integer>("carID"));  
+		carNameColumn.setCellValueFactory(new PropertyValueFactory<CarObject,String>("carName"));  
+		carColorColumn.setCellValueFactory(new PropertyValueFactory<CarObject,String>("carColor")); 
+		carYearColumn.setCellValueFactory(new PropertyValueFactory<CarObject,Integer>("carYear"));
+		ResultSet carsQuery = carDAO.returnCars();
+		if(carsQuery == null) {
+			System.out.println("that sucks");
+		}
+		else {
+			ArrayList<CarObject> co = new ArrayList<CarObject>();
+			System.out.print("here");
+			while(carsQuery.next()) {
+				System.out.println(carsQuery.getInt(1));
+				System.out.println(carsQuery.getString(2));
+				System.out.println(carsQuery.getString(3));
+				System.out.println(carsQuery.getInt(4));
+				co.add(new CarObject(carsQuery.getInt(1), carsQuery.getString(2), carsQuery.getString(3), carsQuery.getInt(4)));
+			}
+			for (CarObject coo : co) {
+				carTableView.getItems().add(coo);
+			}
+		}
+		
 
 	}
 }
