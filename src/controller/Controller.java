@@ -40,4 +40,8 @@ public class Controller implements Initializable {
 	 public void onClickAddUser() {
 		 userDAO.addNewUser(fName.getText(), lName.getText(), username.getText(), password.getText(), email.getText(), age.getText(), DOB.getText());
 	 }
+	 
+	public void grabUsers() {
+		userDAO.grabUsers();
+	}
 }

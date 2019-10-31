@@ -37,7 +37,7 @@ class BaseDAO implements DAO {
             ///Create the properties.
             properties = new Properties();
             ///Load file from it's location, use path where the target file is located.
-            properties.load(new FileInputStream("student.properties"));
+            properties.load(new FileInputStream("credentials"));
             System.out.println("File Read");
 
             //get the details
