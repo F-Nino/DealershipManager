@@ -10,7 +10,7 @@ public class RunCarObject extends Application{
 	    public void start(Stage primaryStage) throws Exception{
 	        Parent root = FXMLLoader.load(getClass().getResource("../view/tableViewDemo.fxml"));
 	        primaryStage.setTitle("Enter New Student");
-	        Scene scene = new Scene(root, 302, 425);
+	        Scene scene = new Scene(root, 460, 425);
 	        //scene.getStylesheets().add(getClass().getResource("../view/application.css").toExternalForm());
 	        primaryStage.setScene(scene);
 	        primaryStage.show();

@@ -13,9 +13,11 @@
             <TableView fx:id="carTableView">
               <columns>
                   <TableColumn fx:id="carIDColumn" prefWidth="75.0" text="Car ID" />
+                <TableColumn fx:id="carBrandColumn" prefWidth="75.0" text="Car Brand" />
                 <TableColumn fx:id="carNameColumn" prefWidth="75.0" text="Car Name" />
                 <TableColumn fx:id="carColorColumn" prefWidth="75.0" text="Car Color" />
                   <TableColumn fx:id="carYearColumn" prefWidth="75.0" text="Car Year" />
+                  <TableColumn fx:id="carPriceColumn" prefWidth="75.0" text="Car Price" />
               </columns>
             </TableView>
             <Button mnemonicParsing="false" onAction="#loadCarDetails" text="Load" />

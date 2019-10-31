@@ -1,5 +1,5 @@
-/model/
-/application/
-/view/
 /controller/
+/view/
 /domain/
+/application/
+/model/

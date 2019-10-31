@@ -13,13 +13,13 @@ public class CarDAO extends BaseDAO {
 		System.out.println("CarDAO Instantiated");
 	}
 
-	public void addNewCar(String carName, String carColor, int carYear) {
+	public void addNewCar(String carBrand, String carName, String carColor, int carYear, int carPrice) {
 
 		try (Connection connection = this.getConnection()) {
 
-			PreparedStatement preparedStatement = connection
-					.prepareStatement("INSERT INTO car(carName, carColor, carYear)" + " VALUES ('" + carName + "', '"
-							+ carColor + "','" + carYear + "' )");
+			PreparedStatement preparedStatement = connection.prepareStatement(
+					"INSERT INTO car(carBrand, carName, carColor, carYear, carPrice)" + " VALUES ('" + carBrand + "', '"
+							+ carName + "', '" + carColor + "', '" + carYear + "', '" + carPrice + "' )");
 			preparedStatement.execute();
 			System.out.print("\nConnected to database!\nNew student was added successfully\n");
 			// lblDisplay.setText();
@@ -32,8 +32,8 @@ public class CarDAO extends BaseDAO {
 		String SQL = "Select * from car";
 		try {
 			Connection connection = this.getConnection();
-            Statement stmt = connection.createStatement();
-            ResultSet rset = stmt.executeQuery((SQL));
+			Statement stmt = connection.createStatement();
+			ResultSet rset = stmt.executeQuery((SQL));
 			return rset;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
