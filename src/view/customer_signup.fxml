@@ -23,7 +23,7 @@
             <TextField layoutX="90.0" layoutY="230.0" prefHeight="27.0" prefWidth="167.0" promptText="Email" />
             <TextField layoutX="90.0" layoutY="275.0" prefHeight="27.0" prefWidth="49.0" promptText="Age" />
             <TextField layoutX="160.0" layoutY="275.0" prefHeight="27.0" prefWidth="99.0" promptText="Date of Birth" />
-            <Button layoutX="90.0" layoutY="328.0" mnemonicParsing="false" style="-fx-background-color: orange;" text="Submit" />
+            <Button fx:id="button" layoutX="90.0" layoutY="328.0" mnemonicParsing="false" onAction="#onClickAddUser" style="-fx-background-color: orange;" text="Submit" />
             <Button layoutX="198.0" layoutY="328.0" mnemonicParsing="false" style="-fx-background-color: orange;" text="Cancel" />
          </children>
       </Pane>
