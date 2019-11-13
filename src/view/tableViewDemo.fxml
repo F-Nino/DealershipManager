@@ -1,26 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
    <children>
       <VBox>
          <children>
+            <HBox prefHeight="54.0" prefWidth="452.0">
+               <children>
+                  <Label contentDisplay="CENTER" text="Sory By" textAlignment="CENTER">
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets left="100.0" />
+                     </HBox.margin>
+                  </Label>
+                  <ComboBox fx:id="comboBoxCars" onAction="#changeSort" prefWidth="150.0">
+                     <HBox.margin>
+                        <Insets top="15.0" />
+                     </HBox.margin>
+                  </ComboBox>
+               </children>
+            </HBox>
             <TableView fx:id="carTableView">
               <columns>
-                  <TableColumn fx:id="carIDColumn" prefWidth="75.0" text="Car ID" />
-                <TableColumn fx:id="carBrandColumn" prefWidth="75.0" text="Car Brand" />
-                <TableColumn fx:id="carNameColumn" prefWidth="75.0" text="Car Name" />
-                <TableColumn fx:id="carColorColumn" prefWidth="75.0" text="Car Color" />
-                  <TableColumn fx:id="carYearColumn" prefWidth="75.0" text="Car Year" />
-                  <TableColumn fx:id="carPriceColumn" prefWidth="75.0" text="Car Price" />
+                  <TableColumn fx:id="carIDColumn" prefWidth="75.0" sortable="false" text="Car ID" />
+                <TableColumn fx:id="carBrandColumn" prefWidth="75.0" sortable="false" text="Car Brand" />
+                <TableColumn fx:id="carNameColumn" prefWidth="75.0" sortable="false" text="Car Name" />
+                <TableColumn fx:id="carColorColumn" prefWidth="75.0" sortable="false" text="Car Color" />
+                  <TableColumn fx:id="carYearColumn" prefWidth="75.0" sortable="false" text="Car Year" />
+                  <TableColumn fx:id="carPriceColumn" prefWidth="75.0" sortable="false" text="Car Price" />
               </columns>
             </TableView>
-            <Button mnemonicParsing="false" onAction="#loadCarDetails" text="Load" />
          </children>
       </VBox>
    </children>

@@ -9,7 +9,7 @@ public class Main extends Application{
 	   @Override
 	    public void start(Stage primaryStage) throws Exception{
 	        Parent root = FXMLLoader.load(getClass().getResource("../view/RegistrationGUI.fxml"));
-	        primaryStage.setTitle("Enter New Student");
+	        primaryStage.setTitle("Enter New Car");
 	        Scene scene = new Scene(root, 400, 300);
 	        scene.getStylesheets().add(getClass().getResource("../view/application.css").toExternalForm());
 	        primaryStage.setScene(scene);
