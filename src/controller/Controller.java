@@ -4,6 +4,7 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.ResourceBundle;
 
 import domain.UserObject;
@@ -66,7 +67,21 @@ public class Controller implements Initializable {
 		// Calling here to check if table exists.
 
 		userDAO = new UserDAO();
-	
+		
+		comboBoxUsers.getItems().clear();
+		comboBoxUsers.getItems().addAll("First Name", "Last Name", "Username", "Email", "Age");
+		comboBoxUsers.getSelectionModel().select("First Name");
+		try {
+			loadUserDetails();
+			userTableView.getItems().clear();
+			for (UserObject coo : userObjectArrayList) {
+				userTableView.getItems().add(coo);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
@@ -91,11 +106,70 @@ public class Controller implements Initializable {
 			System.out.println("that sucks lol nate");
 		} else {
 			while (usersQuery.next()) {
+				System.out.println(usersQuery.getString(1));
+				System.out.println(usersQuery.getString(2));
 				userObjectArrayList.add(new UserObject(usersQuery.getString(1), usersQuery.getString(2),
 						usersQuery.getString(3), usersQuery.getString(4), usersQuery.getString(5),
 						usersQuery.getString(6), usersQuery.getString(7)));
 			}
 
+		}
+	}
+	
+	public void changeSort() {
+		String comboBoxValue = (String) comboBoxUsers.getValue();
+		
+		if (comboBoxValue.equals("First Name")) {
+			for (int i = 0; i < userObjectArrayList.size() - 1; i++) {
+				for (int j = 0; j < userObjectArrayList.size() - i - 1; j++) {
+					if ((userObjectArrayList.get(j).getfName()
+							.compareTo(userObjectArrayList.get(j + 1).getfName())) > 0) {
+						Collections.swap(userObjectArrayList, j, j + 1);
+					}
+				}
+			}
+		} else if (comboBoxValue.equals("Last Name")) {
+			for (int i = 0; i < userObjectArrayList.size() - 1; i++) {
+				for (int j = 0; j < userObjectArrayList.size() - i - 1; j++) {
+					if ((userObjectArrayList.get(j).getlName()
+							.compareTo(userObjectArrayList.get(j + 1).getlName())) > 0) {
+						Collections.swap(userObjectArrayList, j, j + 1);
+					}
+				}
+			}
+		}
+		else if (comboBoxValue.equals("Username")) {
+			for (int i = 0; i < userObjectArrayList.size() - 1; i++) {
+				for (int j = 0; j < userObjectArrayList.size() - i - 1; j++) {
+					if ((userObjectArrayList.get(j).getUsername()
+							.compareTo(userObjectArrayList.get(j + 1).getUsername())) > 0) {
+						Collections.swap(userObjectArrayList, j, j + 1);
+					}
+				}
+			}
+		}else if (comboBoxValue.equals("Email")) {
+			for (int i = 0; i < userObjectArrayList.size() - 1; i++) {
+				for (int j = 0; j < userObjectArrayList.size() - i - 1; j++) {
+					if ((userObjectArrayList.get(j).getEmail()
+							.compareTo(userObjectArrayList.get(j + 1).getEmail())) > 0) {
+						Collections.swap(userObjectArrayList, j, j + 1);
+					}
+				}
+			}
+		}else if (comboBoxValue.equals("Age")) {
+			for (int i = 0; i < userObjectArrayList.size() - 1; i++) {
+				for (int j = 0; j < userObjectArrayList.size() - i - 1; j++) {
+					if ((userObjectArrayList.get(j).getAge()
+							.compareTo(userObjectArrayList.get(j + 1).getAge())) > 0) {
+						Collections.swap(userObjectArrayList, j, j + 1);
+					}
+				}
+			}
+		}
+		
+		userTableView.getItems().clear();
+		for (UserObject coo : userObjectArrayList) {
+			userTableView.getItems().add(coo);
 		}
 	}
 }
