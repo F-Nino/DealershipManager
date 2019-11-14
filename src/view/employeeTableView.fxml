@@ -6,19 +6,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="422.0" prefWidth="499.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="controller.Controller">
+<AnchorPane prefHeight="422.0" prefWidth="499.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
 	 <children>
       <VBox prefHeight="427.0" prefWidth="538.0">
          <children>
-            <TableView fx:id="carTableView" prefHeight="423.0" prefWidth="538.0">
+            <TableView fx:id="userTableView" prefHeight="423.0" prefWidth="538.0">
               <columns>
-                  <TableColumn fx:id="carIDColumn" prefWidth="75.0" text="First Name" />
-                <TableColumn fx:id="carBrandColumn" prefWidth="75.0" text="Last Name" />
-                <TableColumn fx:id="carNameColumn" prefWidth="75.0" text="Username" />
-                <TableColumn fx:id="carColorColumn" prefWidth="75.0" text="Password" />
-                  <TableColumn fx:id="carYearColumn" prefWidth="75.0" text="Email" />
-                  <TableColumn fx:id="carPriceColumn" prefWidth="75.0" text="Age" />
-                  <TableColumn prefWidth="87.0" text="DOB" />
+                  <TableColumn fx:id="userfName" prefWidth="75.0" text="First Name" />
+                <TableColumn fx:id="userlName" prefWidth="75.0" text="Last Name" />
+                <TableColumn fx:id="userUsername" prefWidth="75.0" text="Username" />
+                <TableColumn fx:id="userPassword" prefWidth="75.0" text="Password" />
+                  <TableColumn fx:id="userEmail" prefWidth="75.0" text="Email" />
+                  <TableColumn fx:id="userAge" prefWidth="75.0" text="Age" />
+                  <TableColumn fx:id="userDOB" prefWidth="87.0" text="DOB" />
               </columns>
             </TableView>
             <Button mnemonicParsing="false" onAction="#loadUserDetails" text="Load" />
