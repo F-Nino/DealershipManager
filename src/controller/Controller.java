@@ -66,16 +66,7 @@ public class Controller implements Initializable {
 		// Calling here to check if table exists.
 
 		userDAO = new UserDAO();
-		comboBoxUsers.getItems().clear();
-		comboBoxUsers.getItems().addAll("FName", "LName", "Username", "Password", "Email", "Age", "DOB");
-		
-		comboBoxUsers.getSelectionModel().select("FName");
-		
-		try {
-			loadUserDetails();
-		}catch (SQLException e) {
-			e.printStackTrace();
-		}
+	
 		
 	}
 
@@ -84,9 +75,7 @@ public class Controller implements Initializable {
 				age.getText(), DOB.getText());
 	}
 
-	public void grabUsers() {
-		userDAO.grabUsers();
-	}
+	
 
 	@FXML
 	public void loadUserDetails() throws SQLException {
