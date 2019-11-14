@@ -32,7 +32,7 @@ public class UserDAO extends BaseDAO {
 	}
 
 	public ResultSet grabUsers() {
-		String SQL = "Select * from user";
+		String SQL = "Select * from car";
 		try {
 			Connection connection = this.getConnection();
 			Statement stmt = connection.createStatement();
