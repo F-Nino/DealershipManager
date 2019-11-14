@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import domain.CarObject;
+import domain.EmployeeObject;
 
 public class EmployeeDAO extends BaseDAO {
 
@@ -16,7 +17,7 @@ public class EmployeeDAO extends BaseDAO {
 	}
 
 	public boolean validateUniqueFields(int employeeID, String firstName, String lastName, int adminPrivileges) {
-		ResultSet employeeQuery = returnCustomers();
+		ResultSet employeeQuery = returnEmployees();
 		try {
 			while (employeeQuery.next()) {
 				if (employeeID == employeeQuery.getInt("employeeid") || (firstName.isEmpty()) || (lastName.isEmpty())) {
@@ -47,7 +48,7 @@ public class EmployeeDAO extends BaseDAO {
 		}
 	}
 
-	public ResultSet returnCustomers() {
+	public ResultSet returnEmployees() {
 		String SQL = "Select * from employee";
 		try {
 			Connection connection = this.getConnection();
@@ -60,4 +61,41 @@ public class EmployeeDAO extends BaseDAO {
 			return null;
 		}
 	}
+
+	public void deleteItem(EmployeeObject selectedItem) {
+		String SQL = "DELETE FROM 'employee' WHERE 'employeeid' = " + selectedItem.getEmployeeID();
+		try {
+			Connection connection = this.getConnection();
+			PreparedStatement preparedStatement = connection
+					.prepareStatement("DELETE FROM employee WHERE employeeid = " + selectedItem.getEmployeeID());
+			preparedStatement.execute();
+		} catch (SQLException e) {
+			System.out.print(e.getMessage());
+		}
+	}
+
+	public void editEmployee(int employeeID, String password, String firstname, String lastname, int adminPrivileges) {
+		EmployeeObject eo = new EmployeeObject(employeeID, password, firstname, lastname, adminPrivileges);
+		boolean editEmployee = true;
+
+		if ((firstname.isEmpty()) || (lastname.isEmpty())) {
+			editEmployee = false;
+		}
+
+		if (editEmployee) {
+			try (Connection connection = this.getConnection()) {
+				PreparedStatement preparedStatement = connection.prepareStatement(
+						"UPDATE employee SET passWord = '" + password + "', firstName = '" + firstname + "', lastName = '"
+								+ lastname + "', adminPriviliges = " + adminPrivileges + " WHERE employeeid = " + employeeID);
+				preparedStatement.execute();
+				System.out.print("\nConnected to database!\n employee was edited successfully\n");
+			} catch (SQLException e) {
+				System.out.print(e.getMessage());
+			}
+		}
+		else {
+			throw new NullPointerException("not adding Employee");
+		}
+	}
+
 }

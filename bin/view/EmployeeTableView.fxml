@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -15,12 +16,17 @@
          <children>
             <HBox prefHeight="54.0" prefWidth="452.0">
                <children>
+                  <Button mnemonicParsing="false" onAction="#reloadPage" text="Reload ">
+                     <HBox.margin>
+                        <Insets top="15.0" />
+                     </HBox.margin>
+                  </Button>
                   <Label contentDisplay="CENTER" text="Sory By" textAlignment="CENTER">
                      <padding>
                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                      </padding>
                      <HBox.margin>
-                        <Insets left="100.0" />
+                        <Insets left="60.0" />
                      </HBox.margin>
                   </Label>
                   <ComboBox fx:id="comboBoxEmps" onAction="#changeSort" prefWidth="150.0">
@@ -37,6 +43,26 @@
                 <TableColumn fx:id="empLastNameColumn" prefWidth="75.0" sortable="false" text="Last Name" />
               </columns>
             </TableView>
+            <HBox alignment="TOP_CENTER" prefHeight="52.0" prefWidth="452.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#deleteRow" text="Delete">
+                     <HBox.margin>
+                        <Insets right="25.0" top="10.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
+                     </padding>
+                  </Button>
+                  <Button fx:id="editBtn" mnemonicParsing="false" onAction="#editRow" text="Edit">
+                     <HBox.margin>
+                        <Insets left="25.0" top="10.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
+                     </padding>
+                  </Button>
+               </children>
+            </HBox>
          </children>
       </VBox>
    </children>
