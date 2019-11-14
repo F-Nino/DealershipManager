@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EmployeeViewController">
+   <children>
+      <VBox>
+         <children>
+            <HBox prefHeight="54.0" prefWidth="452.0">
+               <children>
+                  <Label contentDisplay="CENTER" text="Sory By" textAlignment="CENTER">
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets left="100.0" />
+                     </HBox.margin>
+                  </Label>
+                  <ComboBox fx:id="comboBoxEmps" onAction="#changeSort" prefWidth="150.0">
+                     <HBox.margin>
+                        <Insets top="15.0" />
+                     </HBox.margin>
+                  </ComboBox>
+               </children>
+            </HBox>
+            <TableView fx:id="employeeTableView" prefHeight="400.0" prefWidth="362.0">
+              <columns>
+                  <TableColumn fx:id="empIDColumn" prefWidth="75.0" sortable="false" text="Employee ID" />
+                <TableColumn fx:id="empFirstNameColumn" prefWidth="75.0" sortable="false" text="First Name" />
+                <TableColumn fx:id="empLastNameColumn" prefWidth="75.0" sortable="false" text="Last Name" />
+              </columns>
+            </TableView>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

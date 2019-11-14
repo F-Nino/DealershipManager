@@ -98,7 +98,7 @@ public class EmployeeViewController implements Initializable {
 	public void changeSort() {
 		String comboBoxValue = (String) comboBoxEmps.getValue();
 		// bubble sort
-		if (comboBoxEmps.equals("Employee ID")) {
+		if (comboBoxValue.equals("Employee ID")) {
 			for (int i = 0; i < employeeObjectArrayList.size() - 1; i++) {
 				for (int j = 0; j < employeeObjectArrayList.size() - i - 1; j++) {
 					if (employeeObjectArrayList.get(j).getEmployeeID() > employeeObjectArrayList.get(j + 1)
@@ -107,7 +107,7 @@ public class EmployeeViewController implements Initializable {
 					}
 				}
 			}
-		} else if (comboBoxEmps.equals("First Name")) {
+		} else if (comboBoxValue.equals("First Name")) {
 			for (int i = 0; i < employeeObjectArrayList.size() - 1; i++) {
 				for (int j = 0; j < employeeObjectArrayList.size() - i - 1; j++) {
 					if ((employeeObjectArrayList.get(j).getFirstName()
@@ -116,7 +116,7 @@ public class EmployeeViewController implements Initializable {
 					}
 				}
 			}
-		} else if (comboBoxEmps.equals("Last Name")) {
+		} else if (comboBoxValue.equals("Last Name")) {
 			for (int i = 0; i < employeeObjectArrayList.size() - 1; i++) {
 				for (int j = 0; j < employeeObjectArrayList.size() - i - 1; j++) {
 					if ((employeeObjectArrayList.get(j).getLastName()
