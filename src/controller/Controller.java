@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import domain.UserObject;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -21,11 +22,10 @@ public class Controller implements Initializable {
 	private UserDAO userDAO;
 	private ArrayList<UserObject> userObjectArrayList = new ArrayList<UserObject>();
 
-	public void initialize(URL location, ResourceBundle resources) {
-		// Calling here to check if table exists.
 
-		userDAO = new UserDAO();
-	}
+	
+	@FXML
+	private ComboBox<String> comboBoxUsers;
 
 	@FXML
 	private TextField fName;
@@ -61,6 +61,23 @@ public class Controller implements Initializable {
 
 	@FXML
 	private TableView<UserObject> userTableView;
+	
+	public void initialize(URL location, ResourceBundle resources) {
+		// Calling here to check if table exists.
+
+		userDAO = new UserDAO();
+		comboBoxUsers.getItems().clear();
+		comboBoxUsers.getItems().addAll("FName", "LName", "Username", "Password", "Email", "Age", "DOB");
+		
+		comboBoxUsers.getSelectionModel().select("FName");
+		
+		try {
+			loadUserDetails();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
 
 	public void onClickAddUser() {
 		userDAO.addNewUser(fName.getText(), lName.getText(), username.getText(), password.getText(), email.getText(),
