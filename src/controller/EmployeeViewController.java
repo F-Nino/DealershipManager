@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.ResourceBundle;
 
 import domain.CarObject;
+import domain.EmployeeObject;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -18,13 +19,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import model.CarDAO;
+import model.EmployeeDAO;
 
-public class Controller implements Initializable {
+public class EmployeeViewController implements Initializable {
 
-	private CarDAO carDAO;
+	private EmployeeDAO empDAO;
 	private int carYearText;
 	private int carPriceText;
-	private ArrayList<CarObject> carObjectArrayList = new ArrayList<CarObject>();
+	private ArrayList<EmployeeObject> employeeObjectArrayList = new ArrayList<EmployeeObject>();
 
 	@FXML
 	private ComboBox comboBoxCars;

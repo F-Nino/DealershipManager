@@ -98,6 +98,7 @@ public class NewCarController implements Initializable {
 		} catch (Exception e) {
 			informationTxt.setText("Information invalid");
 			informationTxt.setFill(Color.BLACK);
+			e.getStackTrace();
 		}
 
 	}

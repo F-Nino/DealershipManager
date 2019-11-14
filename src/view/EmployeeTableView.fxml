@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
+<AnchorPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EmployeeViewController">
    <children>
       <VBox>
          <children>
@@ -30,14 +30,11 @@
                   </ComboBox>
                </children>
             </HBox>
-            <TableView fx:id="carTableView">
+            <TableView fx:id="carTableView" prefHeight="400.0" prefWidth="362.0">
               <columns>
-                  <TableColumn fx:id="carIDColumn" prefWidth="75.0" sortable="false" text="Car ID" />
-                <TableColumn fx:id="carBrandColumn" prefWidth="75.0" sortable="false" text="Car Brand" />
-                <TableColumn fx:id="carNameColumn" prefWidth="75.0" sortable="false" text="Car Name" />
-                <TableColumn fx:id="carColorColumn" prefWidth="75.0" sortable="false" text="Car Color" />
-                  <TableColumn fx:id="carYearColumn" prefWidth="75.0" sortable="false" text="Car Year" />
-                  <TableColumn fx:id="carPriceColumn" prefWidth="75.0" sortable="false" text="Car Price" />
+                  <TableColumn fx:id="carIDColumn" prefWidth="75.0" sortable="false" text="Employee ID" />
+                <TableColumn fx:id="carBrandColumn" prefWidth="75.0" sortable="false" text="First Name" />
+                <TableColumn fx:id="carNameColumn" prefWidth="75.0" sortable="false" text="Last Name" />
               </columns>
             </TableView>
          </children>

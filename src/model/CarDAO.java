@@ -32,10 +32,12 @@ public class CarDAO extends BaseDAO {
 	}
 
 	public void addNewCar(String carBrand, String carName, String carColor, int carYear, int carPrice) {
+		System.out.println("here1");
 		boolean addCar = validateUniqueFields(carBrand, carName, carColor, carYear, carPrice);
 		if (!addCar) {
 			throw new NullPointerException("not adding car");
 		}
+		System.out.println("here2");
 		try (Connection connection = this.getConnection()) {
 			carBrand = carBrand.substring(0, 1).toUpperCase() + carBrand.substring(1);
 			carName = carName.substring(0, 1).toUpperCase() + carName.substring(1);
