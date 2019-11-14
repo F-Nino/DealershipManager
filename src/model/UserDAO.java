@@ -20,7 +20,7 @@ public class UserDAO extends BaseDAO {
 			PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO user(fName, lName, username, password, email, age, DOB)" +
 					" VALUES ('" + fName +"', '"+ lName +"','"+ username +"', '"+password +"','"+email+ "','"+age+"','"+DOB+"' )");
 			preparedStatement.execute();
-			System.out.print("\nConnected to database!\nNew student was added successfully\n");
+			System.out.print("\nConnected to database!\nNew user was added successfully\n");
 	          
 		}catch(SQLException e){
 			System.out.println(e.getMessage());
@@ -28,7 +28,7 @@ public class UserDAO extends BaseDAO {
 		}
 	}
 	
-	public void grabUsers() {
+	public static void grabUsers() {
 		final String DB_URL = "jdbc:mysql://localhost:3306/CarDealership?serverTimezone=UTC";
 		final String SELECT_QUERY = "SELECT * FROM user";
 		// Use try-catch resources to connect to and query the database
