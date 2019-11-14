@@ -88,7 +88,7 @@ public class Controller implements Initializable {
 	userObjectArrayList.add(new UserObject(usersQuery.getString(1), usersQuery.getString(2),
 	usersQuery.getString(3), usersQuery.getString(4), usersQuery.getString(5),usersQuery.getString(6), usersQuery.getString(7)));
 	}
-	changeSort();
+	
 	}
 	}
 }

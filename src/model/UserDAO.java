@@ -28,35 +28,16 @@ public class UserDAO extends BaseDAO {
 		}
 	}
 	
-	public static void grabUsers() {
-		final String DB_URL = "jdbc:mysql://localhost:3306/CarDealership?serverTimezone=UTC";
-		final String SELECT_QUERY = "SELECT * FROM user";
-		// Use try-catch resources to connect to and query the database
+	public ResultSet grabUsers() {
+		String SQL = "Select * from car";
 		try {
-			Connection conn = DriverManager.getConnection(DB_URL, "root", "Au_150513");
-
-			Statement stmt = conn.createStatement();
-			ResultSet rset = stmt.executeQuery((SELECT_QUERY));
-
-			// Retrieve ResultSet's meta data
-			ResultSetMetaData mData = rset.getMetaData();
-			int numberOfColumns = mData.getColumnCount();
-			System.out.printf("A table of Users from User DBase:%n%n");
-
-			// Display the names of the columns in the ResultSet
-			for (int i = 1; i <= numberOfColumns; i++) {
-				System.out.printf("%-8s\t", mData.getColumnName(i));
-			}
-			System.out.println();
-			// Display the query results
-			while (rset.next()) {
-				for (int i = 1; i <= numberOfColumns; i++) {
-					System.out.printf("%-8s\t", rset.getObject(i));
-				}
-				System.out.println();
-			}
-		} catch (SQLException sqlException) {
-			sqlException.printStackTrace();
+		Connection connection = this.getConnection();
+		            Statement stmt = connection.createStatement();
+		            ResultSet rset = stmt.executeQuery((SQL));
+		return rset;
+		} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		return null;
 		}
-	}
+		}
 }

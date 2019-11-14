@@ -21,7 +21,7 @@
                   <TableColumn prefWidth="87.0" text="DOB" />
               </columns>
             </TableView>
-            <Button mnemonicParsing="false" onAction="#loadCarDetails" text="Load" />
+            <Button mnemonicParsing="false" onAction="#loadUserDetails" text="Load" />
          </children>
       </VBox>
    </children>
