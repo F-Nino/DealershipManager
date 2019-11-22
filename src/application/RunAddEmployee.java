@@ -13,7 +13,7 @@ public class RunAddEmployee extends Application {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("../view/AddEmployee.fxml"));
 			primaryStage.setTitle("Add Employee");
-			Scene scene = new Scene(root, 400, 236);
+			Scene scene = new Scene(root, 800, 600);
 	        scene.getStylesheets().add(getClass().getResource("../view/application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();

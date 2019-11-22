@@ -13,9 +13,9 @@ public class AdminPage extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("AdminHome.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("../view/AdminHome.fxml"));
 			primaryStage.setTitle("Admin Home");
-			Scene scene = new Scene(root,750,500);
+			Scene scene = new Scene(root,800,600);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();

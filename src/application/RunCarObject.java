@@ -8,9 +8,9 @@ import javafx.stage.Stage;
 public class RunCarObject extends Application{
 	   @Override
 	    public void start(Stage primaryStage) throws Exception{
-	        Parent root = FXMLLoader.load(getClass().getResource("../view/tableViewDemo.fxml"));
+	        Parent root = FXMLLoader.load(getClass().getResource("../view/CarTableView.fxml"));
 	        primaryStage.setTitle("View Cars");
-	        Scene scene = new Scene(root, 452, 454);
+	        Scene scene = new Scene(root, 527, 510);
 	        //scene.getStylesheets().add(getClass().getResource("../view/application.css").toExternalForm());
 	        primaryStage.setScene(scene);
 	        primaryStage.show();

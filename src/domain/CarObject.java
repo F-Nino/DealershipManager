@@ -8,8 +8,10 @@ public class CarObject {
 	private String carColor;
 	private int carYear;
 	private int carPrice;
+	private int carQuantity;
 
-	public CarObject(int carID, String carBrand, String carName, String carColor, int carYear, int carPrice) {
+	public CarObject(int carID, String carBrand, String carName, String carColor, int carYear, int carPrice,
+			int carQuantity) {
 		super();
 		this.carID = carID;
 		this.carBrand = carBrand;
@@ -17,6 +19,7 @@ public class CarObject {
 		this.carColor = carColor;
 		this.carYear = carYear;
 		this.carPrice = carPrice;
+		this.carQuantity = carQuantity;
 	}
 
 	public int getCarID() {
@@ -66,7 +69,13 @@ public class CarObject {
 	public void setCarPrice(int carPrice) {
 		this.carPrice = carPrice;
 	}
-	
-	
+
+	public int getCarQuantity() {
+		return carQuantity;
+	}
+
+	public void setCarQuantity(int carQuantity) {
+		this.carQuantity = carQuantity;
+	}
 
 }

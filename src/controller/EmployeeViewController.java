@@ -23,6 +23,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -35,25 +36,13 @@ public class EmployeeViewController implements Initializable {
 	private ArrayList<EmployeeObject> employeeObjectArrayList = new ArrayList<EmployeeObject>();
 
 	@FXML
+	private AnchorPane employeeViewPane;
+
+	@FXML
 	private Button editBtn;
 
 	@FXML
 	private ComboBox comboBoxEmps;
-
-	@FXML
-	private TextField carBrand;
-
-	@FXML
-	private TextField carName;
-
-	@FXML
-	private TextField carColor;
-
-	@FXML
-	private TextField carYear;
-
-	@FXML
-	private TextField carPrice;
 
 	@FXML
 	private Text informationTxt;
@@ -62,10 +51,19 @@ public class EmployeeViewController implements Initializable {
 	private TableColumn<EmployeeObject, Integer> empIDColumn;
 
 	@FXML
+	private TableColumn<EmployeeObject, String> empTitleColumn;
+
+	@FXML
 	private TableColumn<EmployeeObject, String> empFirstNameColumn;
 
 	@FXML
 	private TableColumn<EmployeeObject, String> empLastNameColumn;
+
+	@FXML
+	private TableColumn<EmployeeObject, String> empPositionColumn;
+
+	@FXML
+	private TableColumn<EmployeeObject, Integer> empSalaryColumn;
 
 	@FXML
 	private TableView<EmployeeObject> employeeTableView;
@@ -89,16 +87,21 @@ public class EmployeeViewController implements Initializable {
 	@FXML
 	public void loadEmployeeDetails() throws SQLException {
 		empIDColumn.setCellValueFactory(new PropertyValueFactory<EmployeeObject, Integer>("employeeID"));
+		empTitleColumn.setCellValueFactory(new PropertyValueFactory<EmployeeObject, String>("title"));
 		empFirstNameColumn.setCellValueFactory(new PropertyValueFactory<EmployeeObject, String>("firstName"));
 		empLastNameColumn.setCellValueFactory(new PropertyValueFactory<EmployeeObject, String>("lastName"));
+		empPositionColumn.setCellValueFactory(new PropertyValueFactory<EmployeeObject, String>("position"));
+		empSalaryColumn.setCellValueFactory(new PropertyValueFactory<EmployeeObject, Integer>("salary"));
 		ResultSet employeeQuery = empDAO.returnEmployees();
 		if (empDAO == null) {
 			System.out.println("that sucks");
 		} else {
 			while (employeeQuery.next()) {
-				employeeObjectArrayList.add(new EmployeeObject(employeeQuery.getInt("employeeid"),
-						employeeQuery.getString("password"), employeeQuery.getString("firstName"),
-						employeeQuery.getString("lastName"), employeeQuery.getInt("adminPriviliges")));
+				employeeObjectArrayList
+						.add(new EmployeeObject(employeeQuery.getInt("employeeid"), employeeQuery.getString("password"),
+								employeeQuery.getString("title"), employeeQuery.getString("firstName"),
+								employeeQuery.getString("lastName"), employeeQuery.getString("position"),
+								employeeQuery.getInt("salary"), employeeQuery.getInt("adminPriviliges")));
 			}
 			changeSort();
 		}
@@ -146,6 +149,18 @@ public class EmployeeViewController implements Initializable {
 	}
 
 	@FXML
+	public void adminHomeButton() throws IOException {
+		AnchorPane pane = FXMLLoader.load(getClass().getResource("../view/AdminHome.fxml"));
+		employeeViewPane.getChildren().setAll(pane);
+	}
+
+	@FXML
+	public void addEmployee() throws IOException {
+		AnchorPane pane = FXMLLoader.load(getClass().getResource("../view/AddEmployee.fxml"));
+		employeeViewPane.getChildren().setAll(pane);
+	}
+
+	@FXML
 	public void deleteRow() {
 		EmployeeObject selectedItem = employeeTableView.getSelectionModel().getSelectedItem();
 		employeeTableView.getItems().remove(selectedItem);
@@ -156,16 +171,16 @@ public class EmployeeViewController implements Initializable {
 	@FXML
 	public void editRow(ActionEvent event) throws IOException, SQLException {
 		/*
-		Parent newview = FXMLLoader.load(getClass().getResource("../view/AddEmployee.fxml"));
-		Scene tableViewScene = new Scene(newview);
+		 * Parent newview =
+		 * FXMLLoader.load(getClass().getResource("../view/AddEmployee.fxml")); Scene
+		 * tableViewScene = new Scene(newview);
+		 * 
+		 * Stage window = (Stage) (((Node) event.getSource()).getScene().getWindow());
+		 * 
+		 * window.setScene(tableViewScene); window.setTitle("Edit Employee");
+		 * window.show();
+		 */
 
-		Stage window = (Stage) (((Node) event.getSource()).getScene().getWindow());
-
-		window.setScene(tableViewScene);
-		window.setTitle("Edit Employee");
-		window.show();
-		*/
-		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/editEmployee.fxml"));
 		Parent root = (Parent) loader.load();
 		EditEmployeeController edit = loader.getController();
@@ -179,7 +194,7 @@ public class EmployeeViewController implements Initializable {
 		stage.setScene(new Scene(root));
 		stage.show();
 	}
-	
+
 	@FXML
 	public void reloadPage() throws SQLException {
 		ResultSet employeeQuery = empDAO.returnEmployees();
@@ -188,9 +203,11 @@ public class EmployeeViewController implements Initializable {
 			System.out.println("that sucks");
 		} else {
 			while (employeeQuery.next()) {
-				employeeObjectArrayList.add(new EmployeeObject(employeeQuery.getInt("employeeid"),
-						employeeQuery.getString("password"), employeeQuery.getString("firstName"),
-						employeeQuery.getString("lastName"), employeeQuery.getInt("adminPriviliges")));
+				employeeObjectArrayList
+						.add(new EmployeeObject(employeeQuery.getInt("employeeid"), employeeQuery.getString("password"),
+								employeeQuery.getString("title"), employeeQuery.getString("firstName"),
+								employeeQuery.getString("lastName"), employeeQuery.getString("position"),
+								employeeQuery.getInt("salary"), employeeQuery.getInt("adminPriviliges")));
 			}
 			changeSort();
 		}

@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,23 +9,32 @@ import java.util.Collections;
 import java.util.ResourceBundle;
 
 import domain.CarObject;
+import domain.EmployeeObject;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import model.CarDAO;
 
-public class Controller implements Initializable {
+public class CarViewController implements Initializable {
 
 	private CarDAO carDAO;
 	private int carYearText;
 	private int carPriceText;
 	private ArrayList<CarObject> carObjectArrayList = new ArrayList<CarObject>();
+
+	@FXML
+	private AnchorPane rootPane;
 
 	@FXML
 	private ComboBox comboBoxCars;
@@ -66,6 +76,9 @@ public class Controller implements Initializable {
 	private TableColumn<CarObject, Integer> carPriceColumn;
 
 	@FXML
+	private TableColumn<CarObject, Integer> carQuantityColumn;
+
+	@FXML
 	private TableView<CarObject> carTableView;
 
 	@Override
@@ -92,13 +105,15 @@ public class Controller implements Initializable {
 		carColorColumn.setCellValueFactory(new PropertyValueFactory<CarObject, String>("carColor"));
 		carYearColumn.setCellValueFactory(new PropertyValueFactory<CarObject, Integer>("carYear"));
 		carPriceColumn.setCellValueFactory(new PropertyValueFactory<CarObject, Integer>("carPrice"));
+		carQuantityColumn.setCellValueFactory(new PropertyValueFactory<CarObject, Integer>("carQuantity"));
 		ResultSet carsQuery = carDAO.returnCars();
 		if (carsQuery == null) {
 			System.out.println("that sucks");
 		} else {
 			while (carsQuery.next()) {
-				carObjectArrayList.add(new CarObject(carsQuery.getInt(1), carsQuery.getString(2),
-						carsQuery.getString(3), carsQuery.getString(4), carsQuery.getInt(5), carsQuery.getInt(6)));
+				carObjectArrayList
+						.add(new CarObject(carsQuery.getInt(1), carsQuery.getString(2), carsQuery.getString(3),
+								carsQuery.getString(4), carsQuery.getInt(5), carsQuery.getInt(6), carsQuery.getInt(7)));
 			}
 			changeSort();
 		}
@@ -106,13 +121,42 @@ public class Controller implements Initializable {
 	}
 
 	@FXML
-	public void sortCars() {
+	public void adminHome() throws IOException {
+		AnchorPane pane = FXMLLoader.load(getClass().getResource("../view/AdminHome.fxml"));
+		rootPane.getChildren().setAll(pane);
+	}
+	
+	@FXML
+	public void addCar() throws IOException {
+		AnchorPane pane = FXMLLoader.load(getClass().getResource("../view/AddCar.fxml"));
+		rootPane.getChildren().setAll(pane);
+	}
 
+	@FXML
+	public void deleteRow() {
+		CarObject selectedItem = carTableView.getSelectionModel().getSelectedItem();
+		carTableView.getItems().remove(selectedItem);
+		carDAO.deleteItem(selectedItem);
+		carObjectArrayList.remove(selectedItem);
+	}
+
+	@FXML
+	public void editRow() throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/editCars.fxml"));
+		Parent root = (Parent) loader.load();
+		EditCarController edit = loader.getController();
+
+		CarObject selectedItem = carTableView.getSelectionModel().getSelectedItem();
+		edit.setupCar(selectedItem);
+
+		Stage stage = new Stage();
+
+		stage.setScene(new Scene(root));
+		stage.show();
 	}
 
 	@FXML
 	public void changeSort() {
-		// "Car Name", "Car Color", "Car Year", "Car Price"
 		String comboBoxValue = (String) comboBoxCars.getValue();
 		// bubble sort
 		if (comboBoxValue.equals("Car Brand")) {

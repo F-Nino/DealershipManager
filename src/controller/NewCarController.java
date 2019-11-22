@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,12 +10,14 @@ import java.util.ResourceBundle;
 
 import domain.CarObject;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import model.CarDAO;
@@ -24,7 +27,11 @@ public class NewCarController implements Initializable {
 	private CarDAO carDAO;
 	private int carYearText;
 	private int carPriceText;
+	private int carQuantityText;
 
+	@FXML
+	private AnchorPane addCarPane;
+	
 	@FXML
 	private TextField carBrand;
 
@@ -39,36 +46,24 @@ public class NewCarController implements Initializable {
 
 	@FXML
 	private TextField carPrice;
+	
+	@FXML
+	private TextField carQuantity;
 
 	@FXML
 	private Text informationTxt;
-
-	@FXML
-	private TableColumn<CarObject, Integer> carIDColumn;
-
-	@FXML
-	private TableColumn<CarObject, String> carBrandColumn;
-
-	@FXML
-	private TableColumn<CarObject, String> carNameColumn;
-
-	@FXML
-	private TableColumn<CarObject, String> carColorColumn;
-
-	@FXML
-	private TableColumn<CarObject, Integer> carYearColumn;
-
-	@FXML
-	private TableColumn<CarObject, Integer> carPriceColumn;
-
-	@FXML
-	private TableView<CarObject> carTableView;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// Calling here to check if table exists.
 		carDAO = new CarDAO();
 
+	}
+	
+	@FXML
+	public void goBack() throws IOException {
+		AnchorPane pane = FXMLLoader.load(getClass().getResource("../view/CarTableView.fxml"));
+		addCarPane.getChildren().setAll(pane);
 	}
 
 	@FXML
@@ -81,6 +76,7 @@ public class NewCarController implements Initializable {
 			informationTxt.setFill(Color.BLACK);
 			saveCar = false;
 		}
+		
 		try {
 			carPriceText = Integer.parseInt(carPrice.getText());
 		} catch (Exception e) {
@@ -88,10 +84,18 @@ public class NewCarController implements Initializable {
 			informationTxt.setFill(Color.BLACK);
 			saveCar = false;
 		}
+		
+		try {
+			carQuantityText = Integer.parseInt(carQuantity.getText());
+		} catch (Exception e) {
+			informationTxt.setText("QUANTITY MUST BE A NUMBER");
+			informationTxt.setFill(Color.BLACK);
+			saveCar = false;
+		}
 
 		try {
 			if (saveCar) {
-				carDAO.addNewCar(carBrand.getText(), carName.getText(), carColor.getText(), carYearText, carPriceText);
+				carDAO.addNewCar(carBrand.getText(), carName.getText(), carColor.getText(), carYearText, carPriceText, carQuantityText);
 				informationTxt.setText("successfully added new car");
 				informationTxt.setFill(Color.GREEN);
 			}
