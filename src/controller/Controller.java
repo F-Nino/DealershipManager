@@ -75,6 +75,7 @@ public class Controller implements Initializable {
 			loadUserDetails();
 			userTableView.getItems().clear();
 			for (UserObject coo : userObjectArrayList) {
+				System.out.println(coo.getfName());
 				userTableView.getItems().add(coo);
 			}
 			
@@ -94,8 +95,8 @@ public class Controller implements Initializable {
 
 	@FXML
 	public void loadUserDetails() throws SQLException {
-		userfName.setCellValueFactory(new PropertyValueFactory<UserObject, String>("fname"));
-		userlName.setCellValueFactory(new PropertyValueFactory<UserObject, String>("lname"));
+		userfName.setCellValueFactory(new PropertyValueFactory<UserObject, String>("fName"));
+		userlName.setCellValueFactory(new PropertyValueFactory<UserObject, String>("lName"));
 		userUsername.setCellValueFactory(new PropertyValueFactory<UserObject, String>("username"));
 		userPassword.setCellValueFactory(new PropertyValueFactory<UserObject, String>("password"));
 		userEmail.setCellValueFactory(new PropertyValueFactory<UserObject, String>("email"));

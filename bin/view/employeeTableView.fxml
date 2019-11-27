@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="422.0" prefWidth="499.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
+<AnchorPane prefHeight="422.0" prefWidth="538.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
 	 <children>
       <VBox prefHeight="427.0" prefWidth="538.0">
          <children>
-            <TableView fx:id="userTableView" minHeight="-Infinity" minWidth="-Infinity" prefHeight="423.0" prefWidth="538.0">
+            <TableView fx:id="userTableView" prefHeight="423.0" prefWidth="538.0">
               <columns>
                   <TableColumn fx:id="userfName" prefWidth="75.0" text="First Name" />
                 <TableColumn fx:id="userlName" prefWidth="75.0" text="Last Name" />
@@ -23,7 +22,6 @@
               </columns>
             </TableView>
             <ComboBox fx:id="comboBoxUsers" onAction="#changeSort" prefWidth="150.0" />
-            <Button mnemonicParsing="false" onAction="#loadUserDetails" text="Load" />
          </children>
       </VBox>
    </children>
