@@ -41,6 +41,12 @@ public class AdminHomeController implements Initializable {
 		AnchorPane pane = FXMLLoader.load(getClass().getResource("../view/CarTableView.fxml"));
 		adminHomePane.getChildren().setAll(pane);
 	}
+	
+	@FXML
+	public void changeToPurchaseHistory() throws IOException {
+		AnchorPane pane = FXMLLoader.load(getClass().getResource("../view/PurchaseHistoryTableView.fxml"));
+		adminHomePane.getChildren().setAll(pane);
+	}
 
 	@FXML
 	public void manageEmployees() throws IOException {

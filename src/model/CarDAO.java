@@ -107,4 +107,17 @@ public class CarDAO extends BaseDAO {
 		}
 	}
 
+	public ResultSet returnSpecificCar(int carid) {
+		String SQL = "Select * from car where carid = " + carid;
+		try {
+			Connection connection = this.getConnection();
+			Statement stmt = connection.createStatement();
+			ResultSet rset = stmt.executeQuery((SQL));
+			return rset;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			return null;
+		}
+	}
+
 }

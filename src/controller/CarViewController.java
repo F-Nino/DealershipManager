@@ -131,6 +131,12 @@ public class CarViewController implements Initializable {
 		AnchorPane pane = FXMLLoader.load(getClass().getResource("../view/AddCar.fxml"));
 		rootPane.getChildren().setAll(pane);
 	}
+	
+	@FXML
+	public void reloadPage() throws SQLException {
+		carObjectArrayList.clear();
+		loadCarDetails();
+	}
 
 	@FXML
 	public void deleteRow() {

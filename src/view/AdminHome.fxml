@@ -19,7 +19,7 @@
                      </font>
                   </Label>
                   <Button fx:id="inventory" mnemonicParsing="false" onAction="#changeToInventory" prefHeight="41.0" prefWidth="135.0" style="-fx-background-color: #BEA519;" text="Inventory" />
-                  <Button fx:id="purchaseHistory" mnemonicParsing="false" prefHeight="41.0" prefWidth="135.0" style="-fx-background-color: #BEA519;" text="Purchase History" />
+                  <Button fx:id="purchaseHistory" mnemonicParsing="false" onAction="#changeToPurchaseHistory" prefHeight="41.0" prefWidth="135.0" style="-fx-background-color: #BEA519;" text="Purchase History" />
                   <Button fx:id="manageCustomers" mnemonicParsing="false" prefHeight="41.0" prefWidth="135.0" style="-fx-background-color: #BEA519;" text="Manage Customers" />
                   <Button mnemonicParsing="false" onAction="#manageEmployees" prefHeight="41.0" prefWidth="135.0" style="-fx-background-color: #BEA519;" text="Manage Employees" />
                   <Button fx:id="logOut" mnemonicParsing="false" prefHeight="41.0" prefWidth="187.0" style="-fx-background-color: #BEA519;" text="Log Out" />
