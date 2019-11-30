@@ -13,68 +13,69 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="employeeViewPane" minHeight="600.0" minWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EmployeeViewController">
+<AnchorPane fx:id="rootPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CarViewController">
    <children>
-      <VBox minHeight="600.0" minWidth="800.0">
+      <VBox prefHeight="600.0" prefWidth="800.0">
          <children>
             <HBox alignment="TOP_CENTER" prefHeight="54.0" prefWidth="452.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#adminHomeButton" text="Home">
+                  <Button mnemonicParsing="false" onAction="#adminHome" text="Home">
+                     <padding>
+                        <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
+                     </padding>
                      <HBox.margin>
                         <Insets right="25.0" top="10.0" />
                      </HBox.margin>
-                     <padding>
-                        <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                     </padding>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#addEmployee" text="Add Employee">
-                     <HBox.margin>
-                        <Insets left="25.0" right="25.0" top="10.0" />
-                     </HBox.margin>
+                  <Button fx:id="addCarButton" mnemonicParsing="false" onAction="#addCar" text="Add Car" textAlignment="CENTER">
                      <padding>
                         <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
                      </padding>
+                     <HBox.margin>
+                        <Insets left="25.0" top="10.0" />
+                     </HBox.margin>
                   </Button>
                   <Label contentDisplay="CENTER" text="Sory By" textAlignment="CENTER">
                      <padding>
                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                      </padding>
                      <HBox.margin>
-                        <Insets left="40.0" />
+                        <Insets left="75.0" />
                      </HBox.margin>
                   </Label>
-                  <ComboBox fx:id="comboBoxEmps" onAction="#changeSort" prefWidth="150.0">
+                  <ComboBox fx:id="comboBoxCars" onAction="#changeSort" prefWidth="150.0">
                      <HBox.margin>
                         <Insets top="15.0" />
                      </HBox.margin>
                   </ComboBox>
                </children>
             </HBox>
-            <GridPane prefHeight="494.0" prefWidth="800.0">
+            <GridPane prefHeight="500.0" prefWidth="673.0">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="130.0" prefWidth="141.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="521.0" minWidth="10.0" prefWidth="521.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="130.0" prefWidth="141.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="394.0" minWidth="10.0" prefWidth="130.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="671.0" minWidth="10.0" prefWidth="528.3333358764648" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="667.0" minWidth="8.0" prefWidth="130.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TableView fx:id="employeeTableView" prefHeight="493.0" prefWidth="248.0" GridPane.columnIndex="1">
+                  <TableView fx:id="carTableView" prefHeight="497.0" prefWidth="619.0" GridPane.columnIndex="1">
                     <columns>
-                        <TableColumn fx:id="empIDColumn" prefWidth="84.0" sortable="false" text="Employee ID" />
-                        <TableColumn fx:id="empTitleColumn" prefWidth="58.0" sortable="false" text="Title" />
-                      <TableColumn fx:id="empFirstNameColumn" prefWidth="101.0" sortable="false" text="First Name" />
-                      <TableColumn fx:id="empLastNameColumn" prefWidth="90.0" sortable="false" text="Last Name" />
-                        <TableColumn fx:id="empPositionColumn" prefWidth="119.0" sortable="false" text="Position" />
-                        <TableColumn fx:id="empSalaryColumn" prefWidth="68.0" sortable="false" text="Salary" />
+                        <TableColumn fx:id="carIDColumn" prefWidth="75.0" sortable="false" text="Car ID" />
+                      <TableColumn fx:id="carBrandColumn" prefWidth="75.0" sortable="false" text="Car Brand" />
+                      <TableColumn fx:id="carNameColumn" prefWidth="75.0" sortable="false" text="Car Name" />
+                      <TableColumn fx:id="carColorColumn" prefWidth="75.0" sortable="false" text="Car Color" />
+                        <TableColumn fx:id="carYearColumn" prefWidth="75.0" sortable="false" text="Car Year" />
+                        <TableColumn fx:id="carPriceColumn" prefWidth="75.0" sortable="false" text="Car Price" />
+                        <TableColumn fx:id="carQuantityColumn" prefWidth="75.0" sortable="false" text="Quantity" />
                     </columns>
                   </TableView>
                </children>
             </GridPane>
-            <HBox alignment="TOP_CENTER" prefHeight="52.0" prefWidth="452.0">
+            <HBox alignment="TOP_CENTER" prefHeight="56.0" prefWidth="452.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#reloadPage" text="Reload ">
+                  <Button mnemonicParsing="false" onAction="#deleteRow" text="Delete" textAlignment="CENTER">
                      <HBox.margin>
                         <Insets right="25.0" top="10.0" />
                      </HBox.margin>
@@ -82,15 +83,7 @@
                         <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
                      </padding>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#deleteRow" text="Delete">
-                     <HBox.margin>
-                        <Insets left="25.0" right="25.0" top="10.0" />
-                     </HBox.margin>
-                     <padding>
-                        <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                     </padding>
-                  </Button>
-                  <Button fx:id="editBtn" mnemonicParsing="false" onAction="#editRow" text="Edit">
+                  <Button mnemonicParsing="false" onAction="#editRow" text="Edit">
                      <HBox.margin>
                         <Insets left="25.0" top="10.0" />
                      </HBox.margin>
