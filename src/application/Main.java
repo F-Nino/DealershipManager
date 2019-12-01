@@ -11,9 +11,9 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			 Parent root = FXMLLoader.load(getClass().getResource("../view/customer_signup.fxml"));
+			 Parent root = FXMLLoader.load(getClass().getResource("../view/customerView.fxml"));
 		        primaryStage.setTitle("Enter New Student");
-		        Scene scene = new Scene(root, 350, 450);
+		        Scene scene = new Scene(root);
 		        scene.getStylesheets().add(getClass().getResource("../view/application.css").toExternalForm());
 		        primaryStage.setScene(scene);
 		        primaryStage.show();
