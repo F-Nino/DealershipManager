@@ -28,9 +28,8 @@ public class CustomerDAO extends BaseDAO {
 			return null;
 		}
 	}
-	
-	
-	public ResultSet returnCars() {
+
+	public ResultSet returnCustomer() {
 		String SQL = "Select * from customer";
 		try {
 			Connection connection = this.getConnection();
@@ -40,45 +39,6 @@ public class CustomerDAO extends BaseDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			return null;
-		}
-	}
-
-	public void deleteItem(CarObject selectedItem) {
-		String SQL = "DELETE FROM 'car' WHERE 'carid' = " + selectedItem.getCarID();
-		try {
-			Connection connection = this.getConnection();
-			PreparedStatement preparedStatement = connection
-					.prepareStatement("DELETE FROM car WHERE carid = " + selectedItem.getCarID());
-			preparedStatement.execute();
-		} catch (SQLException e) {
-			System.out.print(e.getMessage());
-		}
-
-	}
-
-	public void editCar(int carID, String carBrand, String carName, String carColor, int carYear, int carPrice,
-			int carQuantity) {
-		// CarObject co = new CarObject(carID, carBrand, carName, carColor, carYear,
-		// carPrice, carQuantity);
-		boolean editCar = true;
-
-		if ((carBrand.isEmpty()) || (carName.isEmpty()) || (carColor.isEmpty())) {
-			editCar = false;
-		}
-
-		if (editCar) {
-			try (Connection connection = this.getConnection()) {
-				PreparedStatement preparedStatement = connection
-						.prepareStatement("UPDATE car SET carBrand = '" + carBrand + "', carName = '" + carName
-								+ "', carColor = '" + carColor + "', carYear = " + carYear + ", carPrice = " + carPrice
-								+ ", carQuantity = " + carQuantity + " WHERE carid = " + carID);
-				preparedStatement.execute();
-				System.out.print("\nConnected to database!\n employee was edited successfully\n");
-			} catch (SQLException e) {
-				System.out.print(e.getMessage());
-			}
-		} else {
-			throw new NullPointerException("not adding Employee");
 		}
 	}
 

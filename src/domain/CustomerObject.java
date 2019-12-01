@@ -7,16 +7,13 @@ public class CustomerObject {
 	private String lastName;
 	private String email;
 	private String password;
-	private int cartID;
 
-	public CustomerObject(int customerID, String firstName, String lastName, String email, String password,
-			int cartID) {
+	public CustomerObject(int customerID, String firstName, String lastName, String email, String password) {
 		this.customerID = customerID;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
-		this.cartID = cartID;
 	}
 
 	public int getCustomerID() {
@@ -57,14 +54,6 @@ public class CustomerObject {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public int getCartID() {
-		return cartID;
-	}
-
-	public void setCartID(int cartID) {
-		this.cartID = cartID;
 	}
 
 }

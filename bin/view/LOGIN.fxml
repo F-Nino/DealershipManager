@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="247.0" prefWidth="387.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="testingPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="247.0" prefWidth="387.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TestMovingElements">
    <children>
       <Pane prefHeight="247.0" prefWidth="387.0" style="-fx-background-color: red;">
          <children>
@@ -19,7 +18,7 @@
             </Label>
             <TextField layoutX="110.0" layoutY="83.0" promptText="Username" />
             <TextField layoutX="110.0" layoutY="131.0" promptText="Password" />
-            <Button layoutX="270.0" layoutY="189.0" mnemonicParsing="false" style="-fx-background-color: orange;" text="New User?" />
+            <Button layoutX="270.0" layoutY="189.0" mnemonicParsing="false" onAction="#nextScene" style="-fx-background-color: orange;" text="New User?" />
          </children>
       </Pane>
    </children>

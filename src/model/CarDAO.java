@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import domain.CarObject;
 import domain.EmployeeObject;
@@ -118,6 +119,40 @@ public class CarDAO extends BaseDAO {
 			// TODO Auto-generated catch block
 			return null;
 		}
+	}
+
+	public ResultSet returnCarsFromCart(ResultSet cartQuery) throws SQLException {
+		
+		String SQL = "Select * from car where carid = ";
+		while(cartQuery.next()) {
+			SQL += cartQuery.getInt("carid");
+			if(!cartQuery.isLast()) {
+				SQL += " OR carid = ";
+			} 
+		}
+		try {
+			Connection connection = this.getConnection();
+			Statement stmt = connection.createStatement();
+			ResultSet rset = stmt.executeQuery((SQL));
+			return rset;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			return null;
+		}
+	}
+
+	public void decreaseQuantity(ArrayList<CarObject> carObjectArrayList) {
+		try (Connection connection = this.getConnection()) {
+			for(CarObject co : carObjectArrayList) {
+				PreparedStatement preparedStatement = connection.prepareStatement(
+						"UPDATE car SET carQuantity = " + (co.getCarQuantity() - 1) + " WHERE carid = " + co.getCarID());
+				preparedStatement.execute();
+			}
+			System.out.print("\nConnected to database!\n employee was edited successfully\n");
+		} catch (SQLException e) {
+			System.out.print(e.getMessage());
+		}
+		
 	}
 
 }
