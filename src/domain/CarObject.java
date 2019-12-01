@@ -12,7 +12,6 @@ public class CarObject {
 
 	public CarObject(int carID, String carBrand, String carName, String carColor, int carYear, int carPrice,
 			int carQuantity) {
-		super();
 		this.carID = carID;
 		this.carBrand = carBrand;
 		this.carName = carName;

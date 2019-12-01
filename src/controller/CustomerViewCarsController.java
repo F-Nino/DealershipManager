@@ -9,7 +9,8 @@ import java.util.Collections;
 import java.util.ResourceBundle;
 
 import domain.CarObject;
-import domain.EmployeeObject;
+import domain.CustomerObject;
+import domain.PurchaseHistoryObject;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,47 +19,26 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.CarDAO;
+import model.CartDAO;
 
-public class CarViewController implements Initializable {
+public class CustomerViewCarsController implements Initializable {
 
+	public static CustomerObject currentCustomer;
 	private CarDAO carDAO;
-	private int carYearText;
-	private int carPriceText;
+	private CartDAO cartDAO;
 	private ArrayList<CarObject> carObjectArrayList = new ArrayList<CarObject>();
 
 	@FXML
-	private AnchorPane rootPane;
+	private AnchorPane customerCarViewPane;
 
 	@FXML
-	private ComboBox comboBoxCars;
-
-	@FXML
-	private TextField carBrand;
-
-	@FXML
-	private TextField carName;
-
-	@FXML
-	private TextField carColor;
-
-	@FXML
-	private TextField carYear;
-
-	@FXML
-	private TextField carPrice;
-
-	@FXML
-	private Text informationTxt;
-
-	@FXML
-	private TableColumn<CarObject, Integer> carIDColumn;
+	private ComboBox<String> comboBoxCars;
 
 	@FXML
 	private TableColumn<CarObject, String> carBrandColumn;
@@ -81,17 +61,20 @@ public class CarViewController implements Initializable {
 	@FXML
 	private TableView<CarObject> carTableView;
 
+	@FXML
+	private Text additionText;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// Calling here to check if table exists.
 		carDAO = new CarDAO();
+		cartDAO = new CartDAO();
 		comboBoxCars.getItems().clear();
 		comboBoxCars.getItems().addAll("Car Brand", "Car Name", "Car Color", "Car Year", "Car Price");
 		comboBoxCars.getSelectionModel().select("Car Brand");
 		try {
 			loadCarDetails();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -99,7 +82,6 @@ public class CarViewController implements Initializable {
 
 	@FXML
 	public void loadCarDetails() throws SQLException {
-		carIDColumn.setCellValueFactory(new PropertyValueFactory<CarObject, Integer>("carID"));
 		carBrandColumn.setCellValueFactory(new PropertyValueFactory<CarObject, String>("carBrand"));
 		carNameColumn.setCellValueFactory(new PropertyValueFactory<CarObject, String>("carName"));
 		carColorColumn.setCellValueFactory(new PropertyValueFactory<CarObject, String>("carColor"));
@@ -118,47 +100,6 @@ public class CarViewController implements Initializable {
 			changeSort();
 		}
 
-	}
-
-	@FXML
-	public void adminHome() throws IOException {
-		AnchorPane pane = FXMLLoader.load(getClass().getResource("../view/AdminHome.fxml"));
-		rootPane.getChildren().setAll(pane);
-	}
-	
-	@FXML
-	public void addCar() throws IOException {
-		AnchorPane pane = FXMLLoader.load(getClass().getResource("../view/AddCar.fxml"));
-		rootPane.getChildren().setAll(pane);
-	}
-	
-	@FXML
-	public void reloadPage() throws SQLException {
-		carObjectArrayList.clear();
-		loadCarDetails();
-	}
-
-	@FXML
-	public void deleteRow() {
-		CarObject selectedItem = carTableView.getSelectionModel().getSelectedItem();
-		carTableView.getItems().remove(selectedItem);
-		carDAO.deleteItem(selectedItem);
-		carObjectArrayList.remove(selectedItem);
-	}
-
-	@FXML
-	public void editRow() throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/editCars.fxml"));
-		Parent root = (Parent) loader.load();
-		EditCarController edit = loader.getController();
-
-		CarObject selectedItem = carTableView.getSelectionModel().getSelectedItem();
-		edit.setupCar(selectedItem);
-
-		Stage stage = new Stage();
-
-		stage.setScene(new Scene(root));
-		stage.show();
 	}
 
 	@FXML
@@ -215,6 +156,51 @@ public class CarViewController implements Initializable {
 			carTableView.getItems().add(coo);
 		}
 
+	}
+
+	public void setUser(CustomerObject customer) {
+		currentCustomer = customer;
+	}
+
+	@FXML
+	public void customerHome() {
+		System.out.println("yo");
+	}
+
+	@FXML
+	public void addToCart() throws IOException {
+		CarObject selectedCar = carTableView.getSelectionModel().getSelectedItem();
+		if (selectedCar.getCarQuantity() > 0) {
+			CustomerObject cc = currentCustomer;
+			try {
+				cartDAO.addNewItemToCart(selectedCar, cc);
+				String atText = "Successfully added " + (selectedCar.getCarName()) + " to the cart";
+				additionText.setText(atText);
+				additionText.setFill(Color.GREEN);
+			} catch (Exception e) {
+				String atText = "Already in cart";
+				additionText.setText(atText);
+				additionText.setFill(Color.RED);
+			}
+
+		} else {
+			String atText = "Not Enough Quantity";
+			additionText.setText(atText);
+			additionText.setFill(Color.RED);
+		}
+
+	}
+
+	@FXML
+	public void viewCart() throws IOException {	    
+	    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/CustomerViewCartTableView.fxml"));    
+	   
+	    Parent root = (Parent)fxmlLoader.load();          
+	    CustomerViewCartController controller = fxmlLoader.<CustomerViewCartController>getController();
+	    controller.setUserForCart(currentCustomer);
+	    System.out.println(currentCustomer);
+		AnchorPane pane = FXMLLoader.load(getClass().getResource("../view/CustomerViewCartTableView.fxml"));
+		customerCarViewPane.getChildren().setAll(pane);
 	}
 
 }
