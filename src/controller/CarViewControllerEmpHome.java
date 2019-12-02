@@ -96,7 +96,8 @@ public class CarViewControllerEmpHome implements Initializable {
 		}
 
 	}
-
+	
+	
 	@FXML
 	public void loadCarDetails() throws SQLException {
 		carIDColumn.setCellValueFactory(new PropertyValueFactory<CarObject, Integer>("carID"));

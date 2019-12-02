@@ -147,6 +147,11 @@ public class CustomerViewCartController implements Initializable {
 			e.printStackTrace();
 		}
 	}
+	
+	public void logOut() throws IOException {
+		AnchorPane pane = FXMLLoader.load(getClass().getResource("../view/LOGIN.fxml"));
+		customerCartViewPane.getChildren().setAll(pane);
+	}
 
 	@FXML
 	public void goBackToPreviousPage() throws IOException {

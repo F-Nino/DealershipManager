@@ -6,9 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import domain.CustomerObject;
+import domain.EmployeeObject;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
@@ -19,7 +22,10 @@ import model.UserDAO;
 public class LoginController implements Initializable {
 
 	private UserDAO user;
-
+	
+	private CustomerObject co;
+	
+	private EmployeeObject emp;
 	@FXML
 	private AnchorPane loginPane;
 
@@ -60,22 +66,40 @@ public class LoginController implements Initializable {
 
 			if (toggleGroupValue.equalsIgnoreCase("customer")) {
 				System.out.println(toggleGroupValue);
-
+				
 				
 				// authenticate customer
-				boolean movePage = false;
+				ResultSet movePage;
+				
+				//co = new CustomerObject(movePage.getInt(0), movePage.getString(1), movePage.getString(2), movePage.getString(3),movePage.getString(4));
 				
 				movePage = user.authCusUser(username.getText(), password.getText());
 
-				if (movePage) {
+				if (movePage != null) {
+					
+					
+					System.out.println("ABOUT TO HIT WHILE");
+					
+					System.out.println("AYOBEFORE" + movePage.getInt(1) + movePage.getString(2));
+				
+						
+						System.out.println("AYO" + movePage.getInt(1) + movePage.getString(2));
+						co = new CustomerObject(movePage.getInt(1), movePage.getString(2), movePage.getString(3), movePage.getString(4) , movePage.getString(5));
+					
+					
+					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/CustomerViewCarTableView.fxml"));    
+					Parent root = (Parent)fxmlLoader.load();          
+				    CustomerViewCarsController controller = fxmlLoader.<CustomerViewCarsController>getController();
+				    controller.setUser(co);
 					AnchorPane pane = FXMLLoader.load(getClass().getResource("../view/CustomerViewCarTableView.fxml"));
 					loginPane.getChildren().setAll(pane);
 				} else {
-					// login failed for customer
 					System.out.println("try again login");
 				}
 
 			}
+			
+			
 
 			if (toggleGroupValue.equalsIgnoreCase("employee")) {
 				System.out.print(toggleGroupValue);
@@ -86,7 +110,15 @@ public class LoginController implements Initializable {
 
 				if(movePage.next()) {
 					System.out.print("Yo000" + movePage.getString(1));
-					if(movePage.getBoolean(8)) {
+					
+					emp = new EmployeeObject(movePage.getInt("employeeid"), movePage.getString("password"),
+                            movePage.getString("title"), movePage.getString("firstName"),
+                            movePage.getString("lastName"), movePage.getString("position"),
+                            movePage.getInt("salary"), movePage.getInt("adminPriviliges"));
+					
+	
+					if(emp.getAdminPrivileges() == 1) {
+						
 						AnchorPane pane = FXMLLoader.load(getClass().getResource("../view/AdminHome.fxml"));
 						loginPane.getChildren().setAll(pane);
 					}else {

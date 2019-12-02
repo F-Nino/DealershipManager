@@ -37,7 +37,6 @@ public class CustomerDAO extends BaseDAO {
 			ResultSet rset = stmt.executeQuery((SQL));
 			return rset;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			return null;
 		}
 	}

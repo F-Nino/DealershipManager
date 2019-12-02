@@ -33,6 +33,8 @@ public class CustomerViewCarsController implements Initializable {
 	private CarDAO carDAO;
 	private CartDAO cartDAO;
 	private ArrayList<CarObject> carObjectArrayList = new ArrayList<CarObject>();
+	
+
 
 	@FXML
 	private AnchorPane customerCarViewPane;
@@ -156,6 +158,11 @@ public class CustomerViewCarsController implements Initializable {
 			carTableView.getItems().add(coo);
 		}
 
+	}
+	
+	public void logOut() throws IOException {
+		AnchorPane pane = FXMLLoader.load(getClass().getResource("../view/LOGIN.fxml"));
+		customerCarViewPane.getChildren().setAll(pane);
 	}
 
 	public void setUser(CustomerObject customer) {

@@ -46,7 +46,7 @@ public class UserDAO extends BaseDAO {
 		}
 	}
 	
-	public boolean authCusUser(String username, String password) {
+	public ResultSet authCusUser(String username, String password) {
 		String SQL = "SELECT * from customer where username = '" + username + "' and password = '" + password + "'";
 		try {
 			System.out.println("in userDAO with " + username + " " + password );
@@ -60,15 +60,15 @@ public class UserDAO extends BaseDAO {
 			
 				System.out.println("+++++ user info++++");
 				
-				System.out.println("not sure what this is" + rset.getClass().toString());
-				return true;
+				System.out.println("not sure what this is" + rset.getInt(1) + rset.getString(2));
+				return rset;
 			}else
 				System.out.println("not in db");
-				return false;
+				return null;
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return false;
+			return null;
 			
 		}
 	}

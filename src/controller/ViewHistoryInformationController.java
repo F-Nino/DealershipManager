@@ -100,7 +100,7 @@ public class ViewHistoryInformationController implements Initializable {
 			while (customerQuery.next()) {
 				viewCustomer = new CustomerObject(customerQuery.getInt("customerid"),
 						customerQuery.getString("firstName"), customerQuery.getString("lastName"),
-						customerQuery.getString("email"), customerQuery.getString("custPassword"));
+						customerQuery.getString("email"), customerQuery.getString("password"));
 			}
 		}
 
