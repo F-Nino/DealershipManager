@@ -45,6 +45,8 @@ public class CarDAO extends BaseDAO {
 			carBrand = carBrand.substring(0, 1).toUpperCase() + carBrand.substring(1);
 			carName = carName.substring(0, 1).toUpperCase() + carName.substring(1);
 			carColor = carColor.substring(0, 1).toUpperCase() + carColor.substring(1);
+			
+			System.out.println("car brand : " + carBrand);
 			PreparedStatement preparedStatement = connection
 					.prepareStatement("INSERT INTO car(carBrand, carName, carColor, carYear, carPrice, carQuantity)"
 							+ " VALUES ('" + carBrand + "', '" + carName + "', '" + carColor + "', '" + carYear + "', '"
@@ -52,7 +54,7 @@ public class CarDAO extends BaseDAO {
 			preparedStatement.execute();
 			System.out.print("\nConnected to database!\nNew car was added successfully\n");
 		} catch (SQLException e) {
-			System.out.print(e.getMessage());
+			System.out.print("add car error message + " + e.getMessage());
 		}
 	}
 

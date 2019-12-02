@@ -40,7 +40,7 @@ public class EmployeeDAO extends BaseDAO {
 		}
 		try (Connection connection = this.getConnection()) {
 			PreparedStatement preparedStatement = connection.prepareStatement(
-					"INSERT INTO employee(employeeid, passWord, title, firstName, lastName, position, salary, adminPriviliges)"
+					"INSERT INTO employee(employeeid, password, title, firstName, lastName, position, salary, adminPriviliges)"
 							+ " VALUES ('" + employeeID + "', '" + password + "', '" + title + "', '" + firstName
 							+ "', '" + lastName + "', '" + position + "', '" + salary + "', '" + adminPrivileges
 							+ "' )");
@@ -87,7 +87,7 @@ public class EmployeeDAO extends BaseDAO {
 
 		if (editEmployee) {
 			try (Connection connection = this.getConnection()) {
-				PreparedStatement preparedStatement = connection.prepareStatement("UPDATE employee SET passWord = '"
+				PreparedStatement preparedStatement = connection.prepareStatement("UPDATE employee SET password = '"
 						+ password + "', title = '" + title + "', firstName = '" + firstName + "', lastName = '"
 						+ lastName + "', position = '" + position + "', salary = " + salary + ", adminPriviliges = "
 						+ adminPrivileges + " WHERE employeeid = " + employeeID);

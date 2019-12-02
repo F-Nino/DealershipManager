@@ -59,5 +59,13 @@ public class AdminHomeController implements Initializable {
 		AnchorPane pane = FXMLLoader.load(getClass().getResource("../view/customerView.fxml"));
 		adminHomePane.getChildren().setAll(pane);
 	}
+	
+	@FXML
+	public void logOut() throws IOException {
+		AnchorPane pane = FXMLLoader.load(getClass().getResource("../view/LOGIN.fxml"));
+		adminHomePane.getChildren().setAll(pane);
+	}
+	
+	
 
 }

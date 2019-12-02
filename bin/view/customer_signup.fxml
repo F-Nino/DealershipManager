@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="550.0" prefHeight="405.0" prefWidth="337.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.addUser">
+<AnchorPane fx:id="signUpPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="335.0" prefHeight="405.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.addUser">
    <children>
       <Pane layoutX="-9.0" layoutY="-1.0" prefHeight="407.0" prefWidth="347.0">
          <children>
@@ -24,7 +24,7 @@
             <TextField fx:id="age" layoutX="90.0" layoutY="275.0" prefHeight="27.0" prefWidth="49.0" promptText="Age" />
             <TextField fx:id="DOB" layoutX="160.0" layoutY="275.0" prefHeight="27.0" prefWidth="99.0" promptText="Date of Birth" />
             <Button fx:id="button" layoutX="90.0" layoutY="328.0" mnemonicParsing="false" onAction="#onClickAddUser" style="-fx-background-color: orange;" text="Submit" />
-            <Button layoutX="198.0" layoutY="328.0" mnemonicParsing="false" style="-fx-background-color: orange;" text="Cancel" />
+            <Button layoutX="198.0" layoutY="328.0" mnemonicParsing="false" onAction="#cancel" style="-fx-background-color: orange;" text="Cancel" />
          </children>
       </Pane>
    </children>
