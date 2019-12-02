@@ -42,7 +42,10 @@ public class EmployeeViewController implements Initializable {
 	private Button editBtn;
 
 	@FXML
-	private ComboBox comboBoxEmps;
+	private TextField searchEmployeeID;
+
+	@FXML
+	private ComboBox<String> comboBoxEmps;
 
 	@FXML
 	private Text informationTxt;
@@ -108,19 +111,45 @@ public class EmployeeViewController implements Initializable {
 
 	}
 
+	public static ArrayList<EmployeeObject> quickSort(ArrayList<EmployeeObject> list) {
+		if (list.isEmpty())
+			return list; // start with recursion base case
+		ArrayList<EmployeeObject> sorted; // this shall be the sorted list to return, no needd to initialise
+		ArrayList<EmployeeObject> smaller = new ArrayList<EmployeeObject>(); // Vehicles smaller than pivot
+		ArrayList<EmployeeObject> greater = new ArrayList<EmployeeObject>(); // Vehicles greater than pivot
+		EmployeeObject pivot = list.get(0); // first Vehicle in list, used as pivot
+		int i;
+		EmployeeObject j; // Variable used for Vehicles in the loop
+		for (i = 1; i < list.size(); i++) {
+			j = list.get(i);
+			if (j.getEmployeeID() < pivot.getEmployeeID()) // make sure Vehicle has proper compareTo method
+				smaller.add(j);
+			else
+				greater.add(j);
+		}
+		smaller = quickSort(smaller); // capitalise 's'
+		greater = quickSort(greater); // sort both halfs recursively
+		smaller.add(pivot); // add initial pivot to the end of the (now sorted) smaller Vehicles
+		smaller.addAll(greater); // add the (now sorted) greater Vehicles to the smaller ones (now smaller is
+									// essentially your sorted list)
+		sorted = smaller; // assign it to sorted; one could just as well do: return smaller
+
+		return sorted;
+	}
+
 	@FXML
 	public void changeSort() {
 		String comboBoxValue = (String) comboBoxEmps.getValue();
 		// bubble sort
 		if (comboBoxValue.equals("Employee ID")) {
-			for (int i = 0; i < employeeObjectArrayList.size() - 1; i++) {
-				for (int j = 0; j < employeeObjectArrayList.size() - i - 1; j++) {
-					if (employeeObjectArrayList.get(j).getEmployeeID() > employeeObjectArrayList.get(j + 1)
-							.getEmployeeID()) {
-						Collections.swap(employeeObjectArrayList, j, j + 1);
-					}
-				}
-			}
+			employeeObjectArrayList = quickSort(
+					employeeObjectArrayList);/*
+												 * for (int i = 0; i < employeeObjectArrayList.size() - 1; i++) { for
+												 * (int j = 0; j < employeeObjectArrayList.size() - i - 1; j++) { if
+												 * (employeeObjectArrayList.get(j).getEmployeeID() >
+												 * employeeObjectArrayList.get(j + 1) .getEmployeeID()) {
+												 * Collections.swap(employeeObjectArrayList, j, j + 1); } } }
+												 */
 		} else if (comboBoxValue.equals("First Name")) {
 			for (int i = 0; i < employeeObjectArrayList.size() - 1; i++) {
 				for (int j = 0; j < employeeObjectArrayList.size() - i - 1; j++) {
@@ -149,6 +178,25 @@ public class EmployeeViewController implements Initializable {
 	}
 
 	@FXML
+	public void searchEmployees() {
+		String empID = searchEmployeeID.getText();
+		int matchingEmpID = -1;
+		if ((!empID.isEmpty()) || (empID != null)) {
+			int empIDInt = Integer.parseInt(empID);
+			for (int i = 0; i < employeeObjectArrayList.size(); i++) {
+				if (empIDInt == employeeObjectArrayList.get(i).getEmployeeID()) {
+					matchingEmpID = i;
+				}
+			}
+			if (matchingEmpID != -1) {
+				employeeTableView.requestFocus();
+				employeeTableView.getSelectionModel().select(matchingEmpID);
+				employeeTableView.getFocusModel().focus(matchingEmpID);
+			}
+		}
+	}
+
+	@FXML
 	public void adminHomeButton() throws IOException {
 		AnchorPane pane = FXMLLoader.load(getClass().getResource("../view/AdminHome.fxml"));
 		employeeViewPane.getChildren().setAll(pane);
@@ -170,16 +218,6 @@ public class EmployeeViewController implements Initializable {
 
 	@FXML
 	public void editRow(ActionEvent event) throws IOException, SQLException {
-		/*
-		 * Parent newview =
-		 * FXMLLoader.load(getClass().getResource("../view/AddEmployee.fxml")); Scene
-		 * tableViewScene = new Scene(newview);
-		 * 
-		 * Stage window = (Stage) (((Node) event.getSource()).getScene().getWindow());
-		 * 
-		 * window.setScene(tableViewScene); window.setTitle("Edit Employee");
-		 * window.show();
-		 */
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/editEmployee.fxml"));
 		Parent root = (Parent) loader.load();

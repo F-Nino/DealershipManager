@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import domain.CarObject;
@@ -17,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -33,8 +36,6 @@ public class CustomerViewCarsController implements Initializable {
 	private CarDAO carDAO;
 	private CartDAO cartDAO;
 	private ArrayList<CarObject> carObjectArrayList = new ArrayList<CarObject>();
-	
-
 
 	@FXML
 	private AnchorPane customerCarViewPane;
@@ -69,6 +70,9 @@ public class CustomerViewCarsController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// Calling here to check if table exists.
+		carTableView.getSelectionModel().setSelectionMode(
+			    SelectionMode.MULTIPLE
+			);
 		carDAO = new CarDAO();
 		cartDAO = new CartDAO();
 		comboBoxCars.getItems().clear();
@@ -104,37 +108,95 @@ public class CustomerViewCarsController implements Initializable {
 
 	}
 
+	public ArrayList<CarObject> mergeSort(ArrayList<CarObject> carObjectArrayList2) {
+		ArrayList<CarObject> left = new ArrayList<>();
+		ArrayList<CarObject> right = new ArrayList<>();
+		int center;
+
+		if (carObjectArrayList2.size() == 1) {
+			return carObjectArrayList2;
+		} else {
+			center = carObjectArrayList2.size() / 2;
+			for (int i = 0; i < center; i++) {
+				left.add(carObjectArrayList2.get(i));
+			}
+
+			for (int i = center; i < carObjectArrayList2.size(); i++) {
+				right.add(carObjectArrayList2.get(i));
+			}
+
+			left = mergeSort(left);
+			right = mergeSort(right);
+
+			merge(left, right, carObjectArrayList2);
+		}
+		return carObjectArrayList2;
+	}
+
+	private void merge(ArrayList<CarObject> left, ArrayList<CarObject> right,
+			ArrayList<CarObject> carObjectArrayList2) {
+		int leftIndex = 0;
+		int rightIndex = 0;
+		int wholeIndex = 0;
+
+		String comboBoxValue = (String) comboBoxCars.getValue();
+		if (comboBoxValue.equals("Car Brand")) {
+			while (leftIndex < left.size() && rightIndex < right.size()) {
+				if ((left.get(leftIndex).getCarBrand().compareTo(right.get(rightIndex).getCarBrand())) < 0) {
+					carObjectArrayList2.set(wholeIndex, left.get(leftIndex));
+					leftIndex++;
+				} else {
+					carObjectArrayList2.set(wholeIndex, right.get(rightIndex));
+					rightIndex++;
+				}
+				wholeIndex++;
+			}
+		} else if (comboBoxValue.equals("Car Name")) {
+			while (leftIndex < left.size() && rightIndex < right.size()) {
+				if ((left.get(leftIndex).getCarName().compareTo(right.get(rightIndex).getCarName())) < 0) {
+					carObjectArrayList2.set(wholeIndex, left.get(leftIndex));
+					leftIndex++;
+				} else {
+					carObjectArrayList2.set(wholeIndex, right.get(rightIndex));
+					rightIndex++;
+				}
+				wholeIndex++;
+			}
+		} else if (comboBoxValue.equals("Car Color")) {
+			while (leftIndex < left.size() && rightIndex < right.size()) {
+				if ((left.get(leftIndex).getCarColor().compareTo(right.get(rightIndex).getCarColor())) < 0) {
+					carObjectArrayList2.set(wholeIndex, left.get(leftIndex));
+					leftIndex++;
+				} else {
+					carObjectArrayList2.set(wholeIndex, right.get(rightIndex));
+					rightIndex++;
+				}
+				wholeIndex++;
+			}
+		}
+		ArrayList<CarObject> rest;
+		int restIndex;
+		if (leftIndex >= left.size()) {
+			rest = right;
+			restIndex = rightIndex;
+		} else {
+			rest = left;
+			restIndex = leftIndex;
+		}
+		
+		for (int i = restIndex; i < rest.size(); i++) {
+			carObjectArrayList2.set(wholeIndex, rest.get(i));
+			wholeIndex++;
+		}
+	}
+
 	@FXML
 	public void changeSort() {
 		String comboBoxValue = (String) comboBoxCars.getValue();
 		// bubble sort
-		if (comboBoxValue.equals("Car Brand")) {
-			for (int i = 0; i < carObjectArrayList.size() - 1; i++) {
-				for (int j = 0; j < carObjectArrayList.size() - i - 1; j++) {
-					if ((carObjectArrayList.get(j).getCarBrand()
-							.compareTo(carObjectArrayList.get(j + 1).getCarBrand())) > 0) {
-						Collections.swap(carObjectArrayList, j, j + 1);
-					}
-				}
-			}
-		} else if (comboBoxValue.equals("Car Name")) {
-			for (int i = 0; i < carObjectArrayList.size() - 1; i++) {
-				for (int j = 0; j < carObjectArrayList.size() - i - 1; j++) {
-					if ((carObjectArrayList.get(j).getCarName()
-							.compareTo(carObjectArrayList.get(j + 1).getCarName())) > 0) {
-						Collections.swap(carObjectArrayList, j, j + 1);
-					}
-				}
-			}
-		} else if (comboBoxValue.equals("Car Color")) {
-			for (int i = 0; i < carObjectArrayList.size() - 1; i++) {
-				for (int j = 0; j < carObjectArrayList.size() - i - 1; j++) {
-					if ((carObjectArrayList.get(j).getCarColor()
-							.compareTo(carObjectArrayList.get(j + 1).getCarColor())) > 0) {
-						Collections.swap(carObjectArrayList, j, j + 1);
-					}
-				}
-			}
+		if ((comboBoxValue.equals("Car Brand")) || (comboBoxValue.equals("Car Name"))
+				|| (comboBoxValue.equals("Car Color"))) {
+			carObjectArrayList = mergeSort(carObjectArrayList);
 		} else if (comboBoxValue.equals("Car Year")) {
 			for (int i = 0; i < carObjectArrayList.size() - 1; i++) {
 				for (int j = 0; j < carObjectArrayList.size() - i - 1; j++) {
@@ -152,14 +214,13 @@ public class CustomerViewCarsController implements Initializable {
 				}
 			}
 		}
-
 		carTableView.getItems().clear();
-		for (CarObject coo : carObjectArrayList) {
-			carTableView.getItems().add(coo);
+		Iterator<CarObject> carObjectIterator = carObjectArrayList.iterator();
+		while (carObjectIterator.hasNext()) {
+			carTableView.getItems().add(carObjectIterator.next());
 		}
-
 	}
-	
+
 	public void logOut() throws IOException {
 		AnchorPane pane = FXMLLoader.load(getClass().getResource("../view/LOGIN.fxml"));
 		customerCarViewPane.getChildren().setAll(pane);
@@ -199,13 +260,13 @@ public class CustomerViewCarsController implements Initializable {
 	}
 
 	@FXML
-	public void viewCart() throws IOException {	    
-	    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/CustomerViewCartTableView.fxml"));    
-	   
-	    Parent root = (Parent)fxmlLoader.load();          
-	    CustomerViewCartController controller = fxmlLoader.<CustomerViewCartController>getController();
-	    controller.setUserForCart(currentCustomer);
-	    System.out.println(currentCustomer);
+	public void viewCart() throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/CustomerViewCartTableView.fxml"));
+
+		Parent root = (Parent) fxmlLoader.load();
+		CustomerViewCartController controller = fxmlLoader.<CustomerViewCartController>getController();
+		controller.setUserForCart(currentCustomer);
+		System.out.println(currentCustomer);
 		AnchorPane pane = FXMLLoader.load(getClass().getResource("../view/CustomerViewCartTableView.fxml"));
 		customerCarViewPane.getChildren().setAll(pane);
 	}

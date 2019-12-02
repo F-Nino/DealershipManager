@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.ResourceBundle;
 
 import domain.CarObject;
@@ -166,3 +168,4 @@ public class CustomerViewCartController implements Initializable {
 	}
 
 }
+

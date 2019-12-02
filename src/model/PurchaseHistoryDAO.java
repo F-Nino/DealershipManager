@@ -10,6 +10,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 
 import domain.CarObject;
 import domain.CustomerObject;
@@ -34,7 +35,7 @@ public class PurchaseHistoryDAO extends BaseDAO {
 		}
 	}
 
-	public void addNewPurchase(ArrayList<CarObject> carObjectArrayList, int customerID) {
+	public void addNewPurchase(int[] carIDs, int customerID) {
 		Calendar calendar = Calendar.getInstance();
 		java.sql.Date currentDate = new java.sql.Date(calendar.getTime().getTime());
 		try (Connection connection = this.getConnection()) {
@@ -42,8 +43,8 @@ public class PurchaseHistoryDAO extends BaseDAO {
 			String query = " insert into history (carid, customerid, datePurchased)" + " values (?, ?, ?)";
 
 			PreparedStatement preparedStmt = connection.prepareStatement(query);
-			for (CarObject co : carObjectArrayList) {
-				preparedStmt.setInt(1, co.getCarID());
+			for(int i = 0; i < carIDs.length; i++) {
+				preparedStmt.setInt(1, carIDs[i]);
 				preparedStmt.setInt(2, customerID);
 				preparedStmt.setDate(3, currentDate);
 				preparedStmt.execute();

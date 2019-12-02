@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 
 import domain.CarObject;
@@ -211,8 +212,9 @@ public class CarViewController implements Initializable {
 		}
 
 		carTableView.getItems().clear();
-		for (CarObject coo : carObjectArrayList) {
-			carTableView.getItems().add(coo);
+		Iterator<CarObject> carObjectIterator = carObjectArrayList.iterator();
+		while(carObjectIterator.hasNext()) {
+			carTableView.getItems().add(carObjectIterator.next());
 		}
 
 	}

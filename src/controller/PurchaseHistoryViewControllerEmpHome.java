@@ -151,35 +151,6 @@ public class PurchaseHistoryViewControllerEmpHome implements Initializable {
 		stage.show();
 	}
 
-	/**
-	 * @FXML public void addEmployee() throws IOException { AnchorPane pane =
-	 *       FXMLLoader.load(getClass().getResource("../view/AddEmployee.fxml"));
-	 *       employeeViewPane.getChildren().setAll(pane); }
-	 * 
-	 * @FXML public void deleteRow() { EmployeeObject selectedItem =
-	 *       employeeTableView.getSelectionModel().getSelectedItem();
-	 *       employeeTableView.getItems().remove(selectedItem);
-	 *       empDAO.deleteItem(selectedItem);
-	 *       employeeObjectArrayList.remove(selectedItem); }
-	 * 
-	 * @FXML public void editRow(ActionEvent event) throws IOException, SQLException
-	 *       {
-	 * 
-	 *       FXMLLoader loader = new
-	 *       FXMLLoader(getClass().getResource("../view/editEmployee.fxml")); Parent
-	 *       root = (Parent) loader.load(); EditEmployeeController edit =
-	 *       loader.getController();
-	 * 
-	 *       EmployeeObject selectedItem =
-	 *       employeeTableView.getSelectionModel().getSelectedItem();
-	 *       System.out.println(selectedItem.getPassword());
-	 *       edit.setupEmployee(selectedItem);
-	 * 
-	 *       Stage stage = new Stage();
-	 * 
-	 *       stage.setScene(new Scene(root)); stage.show(); }
-	 */
-
 	@FXML
 	public void reloadPage() throws SQLException {
 		ResultSet historyQuery = phDAO.returnHistory();
