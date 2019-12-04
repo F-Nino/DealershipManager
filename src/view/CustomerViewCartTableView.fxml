@@ -42,7 +42,7 @@
                         <Insets left="25.0" top="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#logOut" prefHeight="41.0" prefWidth="56.0" text="Log Out" />
+                  <Button mnemonicParsing="false" onAction="#logOut" prefHeight="41.0" prefWidth="102.0" text="Log Out" />
                </children>
             </HBox>
             <GridPane prefHeight="500.0" prefWidth="673.0">
