@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="customerCartViewPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CustomerViewCartController">
+<AnchorPane fx:id="customerCartViewPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CustomerViewCartController">
    <children>
       <VBox prefHeight="600.0" prefWidth="800.0">
          <children>
@@ -39,10 +39,18 @@
                         <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
                      </padding>
                      <HBox.margin>
-                        <Insets left="25.0" top="10.0" />
+                        <Insets left="25.0" right="25.0" top="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#logOut" prefHeight="41.0" prefWidth="56.0" text="Log Out" />
+
+                  <Button mnemonicParsing="false" onAction="#logOut" text="Log Out">
+                     <padding>
+                        <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets left="25.0" top="10.0" />
+                     </HBox.margin></Button>
+
                </children>
             </HBox>
             <GridPane prefHeight="500.0" prefWidth="673.0">
