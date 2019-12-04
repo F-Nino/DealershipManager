@@ -7,29 +7,29 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="adminHomePane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AdminHomeController">
+<AnchorPane fx:id="adminHomePane" maxHeight="750.0" maxWidth="750.0" minHeight="750.0" minWidth="750.0" prefHeight="750.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AdminHomeController">
    <children>
-      <BorderPane prefHeight="600.0" prefWidth="800.0">
+      <BorderPane prefHeight="750.0" prefWidth="750.0">
          <top>
             <HBox prefHeight="41.0" prefWidth="750.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="CENTER">
                <children>
-                  <Label prefHeight="41.0" prefWidth="79.0" style="-fx-background-color: #BEA519;" text="      Menu">
+                  <Label prefHeight="41.0" prefWidth="79.0" text="      Menu">
                      <font>
                         <Font name="System Bold Italic" size="12.0" />
                      </font>
                   </Label>
-                  <Button fx:id="inventory" mnemonicParsing="false" onAction="#changeToInventory" prefHeight="41.0" prefWidth="135.0" style="-fx-background-color: #BEA519;" text="Inventory" />
-                  <Button fx:id="purchaseHistory" mnemonicParsing="false" onAction="#changeToPurchaseHistory" prefHeight="41.0" prefWidth="135.0" style="-fx-background-color: #BEA519;" text="Purchase History" />
-                  <Button mnemonicParsing="false" onAction="#manageCustomers" prefHeight="41.0" prefWidth="135.0" style="-fx-background-color: #BEA519;" text="Manage Customers" />
-                  <Button mnemonicParsing="false" onAction="#manageEmployees" prefHeight="41.0" prefWidth="135.0" style="-fx-background-color: #BEA519;" text="Manage Employees" />
-                  <Button fx:id="logOut" mnemonicParsing="false" onAction="#logOut" prefHeight="41.0" prefWidth="187.0" style="-fx-background-color: #BEA519;" text="Log Out" />
+                  <Button fx:id="inventory" mnemonicParsing="false" onAction="#changeToInventory" prefHeight="41.0" prefWidth="135.0" text="Inventory" />
+                  <Button fx:id="purchaseHistory" mnemonicParsing="false" onAction="#changeToPurchaseHistory" prefHeight="41.0" prefWidth="135.0" text="Purchase History" />
+                  <Button mnemonicParsing="false" onAction="#manageCustomers" prefHeight="41.0" prefWidth="135.0" text="Manage Customers" />
+                  <Button mnemonicParsing="false" onAction="#manageEmployees" prefHeight="41.0" prefWidth="135.0" text="Manage Employees" />
+                  <Button fx:id="logOut" mnemonicParsing="false" onAction="#logOut" prefHeight="41.0" prefWidth="187.0" text="Log Out" />
                </children>
             </HBox>
          </top>
          <center>
-            <HBox prefHeight="436.0" prefWidth="686.0" style="-fx-background-color: #CD2D2B;" BorderPane.alignment="CENTER">
+            <HBox prefHeight="436.0" prefWidth="686.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label prefHeight="559.0" prefWidth="804.0" text="                                            welcome you're an admin!" textOverrun="CLIP">
+                  <Label prefHeight="709.0" prefWidth="750.0" text="                                                      welcome you're an admin!" textOverrun="CLIP">
                      <font>
                         <Font name="System Bold Italic" size="24.0" />
                      </font>

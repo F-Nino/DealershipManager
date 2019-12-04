@@ -9,25 +9,25 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="loginPane" maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="600.0" prefHeight="547.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+<AnchorPane fx:id="loginPane" maxHeight="750.0" maxWidth="750.0" minHeight="750.0" minWidth="750.0" prefHeight="750.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
    <children>
-      <Pane layoutX="-1.0" maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="600.0" prefHeight="600.0" prefWidth="740.0" style="-fx-background-color: red;" AnchorPane.topAnchor="0.0">
+      <Pane maxHeight="750.0" maxWidth="800.0" minHeight="482.0" minWidth="532.0" prefHeight="750.0" prefWidth="750.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Text fontSmoothingType="LCD" layoutX="335.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WELCOME">
+            <Text fontSmoothingType="LCD" layoutX="315.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WELCOME">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
             </Text>
-            <RadioButton fx:id="customer" layoutX="300.0" layoutY="200.0" mnemonicParsing="false" text="customer">
+            <RadioButton fx:id="customer" layoutX="258.0" layoutY="275.0" mnemonicParsing="false" text="customer">
                <toggleGroup>
                   <ToggleGroup fx:id="WhoAreYou" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton fx:id="employee" layoutX="450.0" layoutY="200.0" mnemonicParsing="false" text="employee" toggleGroup="$WhoAreYou" />
-            <TextField fx:id="username" layoutX="326.0" layoutY="250.0" promptText="Username" />
-            <TextField fx:id="password" layoutX="326.0" layoutY="300.0" promptText="Password" />
-            <Button layoutX="450.0" layoutY="360.0" mnemonicParsing="false" onAction="#singUp" style="-fx-background-color: orange;" text="New User?" />
-            <Button layoutX="300.0" layoutY="360.0" mnemonicParsing="false" onAction="#login" text="Login" />
+            <RadioButton fx:id="employee" layoutX="401.0" layoutY="275.0" mnemonicParsing="false" text="employee" toggleGroup="$WhoAreYou" />
+            <TextField fx:id="username" layoutX="295.0" layoutY="329.0" promptText="Username" />
+            <TextField fx:id="password" layoutX="295.0" layoutY="385.0" promptText="Password" />
+            <Button layoutX="416.0" layoutY="481.0" mnemonicParsing="false" onAction="#singUp" text="New User?" />
+            <Button layoutX="271.0" layoutY="481.0" mnemonicParsing="false" onAction="#login" text="Login" />
          </children>
       </Pane>
    </children>

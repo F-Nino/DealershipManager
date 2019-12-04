@@ -13,7 +13,7 @@ public class Main extends Application {
 		try {
 			 Parent root = FXMLLoader.load(getClass().getResource("../view/LOGIN.fxml"));
 		        primaryStage.setTitle("Car Dealership App");
-		        Scene scene = new Scene(root, 800, 600);
+		        Scene scene = new Scene(root, 750, 750);
 		        scene.getStylesheets().add(getClass().getResource("../view/application.css").toExternalForm());
 		        primaryStage.setScene(scene);
 		        primaryStage.show();

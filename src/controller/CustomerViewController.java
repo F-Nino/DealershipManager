@@ -100,8 +100,8 @@ public class CustomerViewController implements Initializable {
 
 	@FXML
 	public void loadUserDetails() throws SQLException {
-		userfName.setCellValueFactory(new PropertyValueFactory<UserObject, String>("fName"));
-		userlName.setCellValueFactory(new PropertyValueFactory<UserObject, String>("lName"));
+		userfName.setCellValueFactory(new PropertyValueFactory<UserObject, String>("firstName"));
+		userlName.setCellValueFactory(new PropertyValueFactory<UserObject, String>("lastName"));
 		userUsername.setCellValueFactory(new PropertyValueFactory<UserObject, String>("username"));
 		userPassword.setCellValueFactory(new PropertyValueFactory<UserObject, String>("password"));
 		userEmail.setCellValueFactory(new PropertyValueFactory<UserObject, String>("email"));
@@ -114,9 +114,9 @@ public class CustomerViewController implements Initializable {
 			while (usersQuery.next()) {
 				System.out.println(usersQuery.getString(1));
 				System.out.println(usersQuery.getString(2));
-				userObjectArrayList.add(new UserObject(usersQuery.getString(1), usersQuery.getString(2),
-						usersQuery.getString(3), usersQuery.getString(4), usersQuery.getString(5),
-						usersQuery.getString(6), usersQuery.getString(7)));
+				userObjectArrayList.add(new UserObject(usersQuery.getString(2), usersQuery.getString(3),
+						usersQuery.getString(4), usersQuery.getString(5), usersQuery.getString(6),
+						usersQuery.getString(7), usersQuery.getString(8)));
 			}
 
 		}

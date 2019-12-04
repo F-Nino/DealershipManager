@@ -5,12 +5,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="EmpHomePane" prefHeight="304.0" prefWidth="325.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EmpHomeController">
+<AnchorPane fx:id="EmpHomePane" maxHeight="750.0" maxWidth="750.0" minHeight="750.0" minWidth="750.0" prefHeight="750.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EmpHomeController">
    <children>
-      <Button layoutX="76.0" layoutY="14.0" mnemonicParsing="false" onAction="#changeToInventory" text="Inventory" />
-      <Button layoutX="145.0" layoutY="14.0" mnemonicParsing="false" onAction="#purchaseHistory" text="Purchase History" />
-      <Button layoutX="256.0" layoutY="14.0" mnemonicParsing="false" onAction="#logOut" text="Log Out" />
-      <Text layoutX="69.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to employee Home page" />
-      <Label layoutX="28.0" layoutY="19.0" text="Menu" />
+      <Button layoutX="251.0" layoutY="99.0" mnemonicParsing="false" onAction="#changeToInventory" prefHeight="39.0" prefWidth="99.0" text="Inventory" />
+      <Button layoutX="350.0" layoutY="99.0" mnemonicParsing="false" onAction="#purchaseHistory" prefHeight="39.0" prefWidth="111.0" text="Purchase History" />
+      <Button layoutX="461.0" layoutY="99.0" mnemonicParsing="false" onAction="#logOut" prefHeight="39.0" prefWidth="99.0" text="Log Out" />
+      <Text layoutX="281.0" layoutY="394.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to employee Home page" />
+      <Label layoutX="121.0" layoutY="104.0" text="Menu" />
    </children>
 </AnchorPane>

@@ -13,9 +13,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="purchaseHistoryViewPane" minHeight="600.0" minWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PurchaseHistoryViewController">
+<AnchorPane fx:id="purchaseHistoryViewPane" maxHeight="750.0" maxWidth="750.0" minHeight="750.0" minWidth="750.0" prefHeight="750.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PurchaseHistoryViewController">
    <children>
-      <VBox minHeight="600.0" minWidth="800.0">
+      <VBox minHeight="600.0" minWidth="750.0" prefHeight="750.0" prefWidth="750.0">
          <children>
             <HBox alignment="TOP_CENTER" prefHeight="54.0" prefWidth="452.0">
                <children>
