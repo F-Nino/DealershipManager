@@ -130,7 +130,7 @@ public class CarViewControllerEmpHome implements Initializable {
 	
 	@FXML
 	public void addCar() throws IOException {
-		AnchorPane pane = FXMLLoader.load(getClass().getResource("../view/AddCar.fxml"));
+		AnchorPane pane = FXMLLoader.load(getClass().getResource("../view/addCarEmp.fxml"));
 		rootPane.getChildren().setAll(pane);
 	}
 	
